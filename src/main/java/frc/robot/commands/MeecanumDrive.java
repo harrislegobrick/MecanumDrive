@@ -22,8 +22,10 @@ public class MeecanumDrive extends Command {
   @Override
   protected void execute() {
     double throttle = (1.0 - Robot.oi.getJoyThrottle()) / -2.0;
-    Robot.drivetrain.rodot.driveCartesian(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle,
-        Robot.oi.getJoyZ() * throttle);
+    Robot.drivetrain.rodot.driveCartesian(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle, Robot.oi.getJoyZ() * throttle);
+
+    // uncoment this for field oriented driving
+    //Robot.drivetrain.rodot.driveCartesian(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle, Robot.oi.getJoyZ() * throttle, Robot.drivetrain.getGyroo());
   }
 
   @Override
