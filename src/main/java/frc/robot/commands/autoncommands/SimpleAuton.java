@@ -8,7 +8,8 @@
 package frc.robot.commands.autoncommands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.autoncommands.RotateBot.Direction;
+import frc.robot.commands.autoncommands.RotateBot.RDirection;
+import frc.robot.commands.autoncommands.DriveStraight.DDirection;;
 
 public class SimpleAuton extends CommandGroup {
   /**
@@ -16,8 +17,8 @@ public class SimpleAuton extends CommandGroup {
    */
   public SimpleAuton() {
     // Add Commands here:
-    addSequential(new DriveStraight(2, 0.6));
-    addSequential(new RotateBot(90, Direction.LEFT));
+    addSequential(new DriveStraight(2, 0.6, DDirection.FORWARD));
+    addSequential(new RotateBot(90, RDirection.LEFT));
 
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

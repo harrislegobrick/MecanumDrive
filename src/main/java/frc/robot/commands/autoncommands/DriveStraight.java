@@ -11,24 +11,44 @@ import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
 public class DriveStraight extends TimedCommand {
-  private double driveSpeed, error, initalHeading;
+  public enum DDirection{
+    FORWARD, BACKWARD, LEFT, RIGHT
+  }
+  
+  private DDirection direction;
+  private double driveSpeed, error, initalHeading, driveDirection;
   private double kP = 0.1;
 
-  public DriveStraight(double timeout, double driveSpeed) {
-    super(timeout);
+  public DriveStraight(double time, double driveSpeed, DDirection direction) {
+    super(time);
     requires(Robot.drivetrain);
-    this.driveSpeed = driveSpeed;
+    this.driveSpeed = Math.abs(driveSpeed);
+    this.direction = direction; 
   }
 
   @Override
   protected void initialize() {
     initalHeading = Robot.drivetrain.getGyroo();
+    switch(direction){
+      case FORWARD : 
+      driveDirection = 0;
+      break;
+      case BACKWARD : 
+      driveDirection = 180;
+      break;
+      case LEFT : 
+      driveDirection = -90;
+      break;
+      case RIGHT : 
+      driveDirection = 90;
+      break;
+    }
   }
 
   @Override
   protected void execute() {
     error = initalHeading - Robot.drivetrain.getGyroo();
-    Robot.drivetrain.rodot.drivePolar(driveSpeed, 0.0, error * kP);
+    Robot.drivetrain.rodot.drivePolar(driveSpeed, driveDirection, error * kP);
   }
 
   @Override

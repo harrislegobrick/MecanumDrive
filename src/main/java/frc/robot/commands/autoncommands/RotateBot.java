@@ -11,16 +11,16 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class RotateBot extends Command {
-  public enum Direction {
+  public enum RDirection {
     RIGHT, LEFT
   }
 
-  private Direction direction;
+  private RDirection direction;
   private double degrees, initalHeading;
   private double turnSpeed = 0.6;
   private double turnExactness = 1.0;
 
-  public RotateBot(double degrees, Direction direction) {
+  public RotateBot(double degrees, RDirection direction) {
     requires(Robot.drivetrain);
     this.degrees = degrees;
     this.direction = direction;
@@ -33,14 +33,12 @@ public class RotateBot extends Command {
 
   @Override
   protected void execute() {
-    Robot.drivetrain.rodot.drivePolar(0.0, 0.0, (direction == Direction.RIGHT ? turnSpeed : -turnSpeed));
+    Robot.drivetrain.rodot.drivePolar(0.0, 0.0, (direction == RDirection.RIGHT ? turnSpeed : -turnSpeed));
   }
 
   @Override
   protected boolean isFinished() {
-    return (initalHeading
-        + Robot.drivetrain.getGyroo()) >= ((initalHeading + (direction == Direction.RIGHT ? degrees : -degrees))
-            * turnExactness);
+    return (initalHeading + Robot.drivetrain.getGyroo()) >= ((initalHeading + (direction == RDirection.RIGHT ? degrees : -degrees)) * turnExactness);
   }
 
   @Override
