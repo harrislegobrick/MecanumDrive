@@ -10,6 +10,7 @@ package frc.robot.commands.autoncommands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.autoncommands.DriveStraight.DDirection;
+import frc.robot.commands.autoncommands.RotateBot.RDirection;
 
 public class ChaChaSlide extends CommandGroup {
   /**
@@ -23,5 +24,11 @@ public class ChaChaSlide extends CommandGroup {
     addSequential(new DriveStraight(1, 0.8, DDirection.LEFT));
     Timer.delay(2);
     addSequential(new DriveStraight(1, 0.8, DDirection.BACKWARD));
+    Timer.delay(3);
+    addSequential(new RotateBot(90, RDirection.LEFT));
+    Timer.delay(1);
+    addSequential(new RotateBot(180, RDirection.RIGHT));
+    Timer.delay(1);
+    addSequential(new RotateBot(90, RDirection.LEFT));
   }
 }
