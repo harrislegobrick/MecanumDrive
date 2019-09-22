@@ -11,8 +11,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class MeecanumDrive extends Command {
-  public MeecanumDrive() {
+  private boolean fieldOriented;
+
+  public MeecanumDrive(boolean fieldOriented) {
     requires(Robot.drivetrain);
+    this.fieldOriented = fieldOriented;
   }
 
   @Override
@@ -22,10 +25,12 @@ public class MeecanumDrive extends Command {
   @Override
   protected void execute() {
     double throttle = (1.0 - Robot.oi.getJoyThrottle()) / -2.0;
-    Robot.drivetrain.rodot.driveCartesian(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle, Robot.oi.getJoyZ() * throttle);
-
-    // uncoment this for field oriented driving
-    //Robot.drivetrain.rodot.driveCartesian(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle, Robot.oi.getJoyZ() * throttle, Robot.drivetrain.getGyroo());
+    
+    if(fieldOriented){
+      Robot.drivetrain.rodot.driveCartesian(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle, Robot.oi.getJoyZ() * throttle, Robot.drivetrain.getGyroo());
+    }else{
+      Robot.drivetrain.rodot.driveCartesian(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle, Robot.oi.getJoyZ() * throttle);
+    }
   }
 
   @Override
@@ -39,5 +44,6 @@ public class MeecanumDrive extends Command {
 
   @Override
   protected void interrupted() {
+    end();
   }
 }

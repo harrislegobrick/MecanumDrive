@@ -38,6 +38,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     oi = new OI();
     drivetrain = new Drivetrain();
+
+    OI.init();
     
     chooser.setDefaultOption("Default Auto", new SimpleAuton());
     chooser.addOption("Test Auto", new SimpleAuton());
