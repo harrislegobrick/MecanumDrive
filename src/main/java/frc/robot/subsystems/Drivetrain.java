@@ -34,12 +34,12 @@ public class Drivetrain extends Subsystem {
     gyro.calibrate();
   }
 
-  public void driveStick(double ySpeed, double xSpeed, double zRotation) {
-    rodot.driveCartesian(ySpeed, xSpeed, zRotation);
-  }
-
-  public void driveStickField(double ySpeed, double xSpeed, double zRotation, double gero) {
-    rodot.driveCartesian(ySpeed, xSpeed, zRotation, gero);
+  public void driveStick(double ySpeed, double xSpeed, double zRotation, boolean oriented) {
+    if (oriented) {
+      rodot.driveCartesian(ySpeed, xSpeed, zRotation, gyro.getAngle());
+    } else {
+      rodot.driveCartesian(ySpeed, xSpeed, zRotation);
+    }
   }
 
   public void driveAuton(double magnitude, double angle, double zRotation) {

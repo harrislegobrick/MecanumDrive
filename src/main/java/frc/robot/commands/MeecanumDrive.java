@@ -20,18 +20,14 @@ public class MeecanumDrive extends Command {
 
   @Override
   protected void initialize() {
-    if(fieldOriented) Robot.drivetrain.resetGyro();
+    if (fieldOriented)
+      Robot.drivetrain.resetGyro();
   }
 
   @Override
   protected void execute() {
     double throttle = (1.0 - Robot.oi.getJoyThrottle()) / -2.0;
-    
-    if(fieldOriented){
-      Robot.drivetrain.driveStickField(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle, Robot.oi.getJoyZ() * throttle, Robot.drivetrain.getGyroo());
-    }else{
-      Robot.drivetrain.driveStick(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle, Robot.oi.getJoyZ() * throttle);
-    }
+    Robot.drivetrain.driveStick(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle, Robot.oi.getJoyZ() * throttle, fieldOriented);
   }
 
   @Override
@@ -41,6 +37,7 @@ public class MeecanumDrive extends Command {
 
   @Override
   protected void end() {
+    Robot.drivetrain.driveStop();
   }
 
   @Override
