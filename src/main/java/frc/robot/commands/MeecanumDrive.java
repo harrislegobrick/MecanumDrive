@@ -20,6 +20,7 @@ public class MeecanumDrive extends Command {
 
   @Override
   protected void initialize() {
+    if(fieldOriented) Robot.drivetrain.resetGyro();
   }
 
   @Override
