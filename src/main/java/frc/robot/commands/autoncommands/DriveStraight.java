@@ -48,12 +48,12 @@ public class DriveStraight extends TimedCommand {
   @Override
   protected void execute() {
     error = initalHeading - Robot.drivetrain.getGyroo();
-    Robot.drivetrain.rodot.drivePolar(driveSpeed, driveDirection, error * kP);
+    Robot.drivetrain.driveAuton(driveSpeed, driveDirection, error * kP);
   }
 
   @Override
   protected void end() {
-    Robot.drivetrain.rodot.stopMotor();
+    Robot.drivetrain.driveStop();
   }
 
   @Override

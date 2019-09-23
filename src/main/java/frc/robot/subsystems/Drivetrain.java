@@ -19,7 +19,7 @@ import frc.robot.commands.MeecanumDrive;
  */
 public class Drivetrain extends Subsystem {
   private Talon frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
-  public MecanumDrive rodot;
+  private MecanumDrive rodot;
   private ADXRS450_Gyro gyro;
 
   public Drivetrain() {
@@ -27,11 +27,27 @@ public class Drivetrain extends Subsystem {
     frontRightMotor = new Talon(RobotMap.FRONTRIGHTMOTOR);
     backLeftMotor = new Talon(RobotMap.BACKLEFTMOTOR);
     backRightMotor = new Talon(RobotMap.BACKRIGHTMOTOR);
-    
+
     rodot = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
 
     gyro = new ADXRS450_Gyro();
     gyro.calibrate();
+  }
+
+  public void driveStick(double ySpeed, double xSpeed, double zRotation) {
+    rodot.driveCartesian(ySpeed, xSpeed, zRotation);
+  }
+
+  public void driveStickField(double ySpeed, double xSpeed, double zRotation, double gero) {
+    rodot.driveCartesian(ySpeed, xSpeed, zRotation, gero);
+  }
+
+  public void driveAuton(double magnitude, double angle, double zRotation) {
+    rodot.drivePolar(magnitude, angle, zRotation);
+  }
+
+  public void driveStop() {
+    rodot.stopMotor();
   }
 
   public double getGyroo() {

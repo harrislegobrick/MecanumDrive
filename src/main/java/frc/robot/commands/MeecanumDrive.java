@@ -28,9 +28,9 @@ public class MeecanumDrive extends Command {
     double throttle = (1.0 - Robot.oi.getJoyThrottle()) / -2.0;
     
     if(fieldOriented){
-      Robot.drivetrain.rodot.driveCartesian(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle, Robot.oi.getJoyZ() * throttle, Robot.drivetrain.getGyroo());
+      Robot.drivetrain.driveStickField(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle, Robot.oi.getJoyZ() * throttle, Robot.drivetrain.getGyroo());
     }else{
-      Robot.drivetrain.rodot.driveCartesian(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle, Robot.oi.getJoyZ() * throttle);
+      Robot.drivetrain.driveStick(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle, Robot.oi.getJoyZ() * throttle);
     }
   }
 
