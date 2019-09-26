@@ -62,6 +62,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     SmartDashboard.putNumber("gyro", Robot.drivetrain.getGyroo());
+    SmartDashboard.putNumber("limelight x", Robot.limelight.getX());
+    SmartDashboard.putNumber("limelight area", Robot.limelight.getArea());
   }
 
   /**
