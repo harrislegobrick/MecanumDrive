@@ -8,7 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.RobotMap;
@@ -18,15 +18,15 @@ import frc.robot.commands.MeecanumDrive;
  * Add your docs here.
  */
 public class Drivetrain extends Subsystem {
-  private Talon frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
+  private PWMVictorSPX frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
   private MecanumDrive rodot;
   private ADXRS450_Gyro gyro;
 
   public Drivetrain() {
-    frontLeftMotor = new Talon(RobotMap.FRONTLEFTMOTOR);
-    frontRightMotor = new Talon(RobotMap.FRONTRIGHTMOTOR);
-    backLeftMotor = new Talon(RobotMap.BACKLEFTMOTOR);
-    backRightMotor = new Talon(RobotMap.BACKRIGHTMOTOR);
+    frontLeftMotor = new PWMVictorSPX(RobotMap.FRONTLEFTMOTOR);
+    frontRightMotor = new PWMVictorSPX(RobotMap.FRONTRIGHTMOTOR);
+    backLeftMotor = new PWMVictorSPX(RobotMap.BACKLEFTMOTOR);
+    backRightMotor = new PWMVictorSPX(RobotMap.BACKRIGHTMOTOR);
 
     rodot = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
 
