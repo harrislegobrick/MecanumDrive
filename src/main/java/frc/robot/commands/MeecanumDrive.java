@@ -13,6 +13,11 @@ import frc.robot.Robot;
 public class MeecanumDrive extends Command {
   private boolean fieldOriented;
 
+  public MeecanumDrive(){
+    requires(Robot.drivetrain);
+    fieldOriented = false;
+  }
+
   public MeecanumDrive(boolean fieldOriented) {
     requires(Robot.drivetrain);
     this.fieldOriented = fieldOriented;
