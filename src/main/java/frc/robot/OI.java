@@ -25,7 +25,7 @@ public class OI {
     fieldOriented = new JoystickButton(stick, 4);
     
     fieldOriented.whenPressed(new MeecanumDrive(true));
-    robotOriented.whenPressed(new MeecanumDrive(false));
+    robotOriented.whenPressed(new MeecanumDrive());
   }
 
   public double getJoyY() {
