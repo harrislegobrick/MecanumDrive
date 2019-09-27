@@ -27,8 +27,9 @@ public class LimelightTrackToTarget extends Command {
   protected void execute() {
     double magnitude = 0.5; //Robot.limelight.getArea() * 0.2; gotta figure out what the area would be first
     double angle = Robot.limelight.getX();
+    double zRotation = angle / 20.0;
 
-    Robot.drivetrain.driveAuton(magnitude, angle, 0.0);
+    Robot.drivetrain.driveAuton(magnitude, angle, zRotation);
   }
 
   // Make this return true when this Command no longer needs to run execute()
