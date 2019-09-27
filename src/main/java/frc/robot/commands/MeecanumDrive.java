@@ -32,7 +32,7 @@ public class MeecanumDrive extends Command {
   @Override
   protected void execute() {
     double throttle = (1.0 - Robot.oi.getJoyThrottle()) / -2.0;
-    Robot.drivetrain.driveStick(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle, Robot.oi.getJoyZ() * throttle, fieldOriented);
+    Robot.drivetrain.stick(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle, Robot.oi.getJoyZ() * throttle, fieldOriented);
   }
 
   @Override
@@ -42,7 +42,7 @@ public class MeecanumDrive extends Command {
 
   @Override
   protected void end() {
-    Robot.drivetrain.driveStop();
+    Robot.drivetrain.stop();
   }
 
   @Override

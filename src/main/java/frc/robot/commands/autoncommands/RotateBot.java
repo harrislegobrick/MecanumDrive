@@ -33,7 +33,7 @@ public class RotateBot extends Command {
 
   @Override
   protected void execute() {
-    Robot.drivetrain.driveAuton(0.0, 0.0, (direction == RDirection.RIGHT ? turnSpeed : -turnSpeed));
+    Robot.drivetrain.auton(0.0, 0.0, (direction == RDirection.RIGHT ? turnSpeed : -turnSpeed));
   }
 
   @Override
@@ -43,7 +43,7 @@ public class RotateBot extends Command {
 
   @Override
   protected void end() {
-    Robot.drivetrain.driveStop();
+    Robot.drivetrain.stop();
   }
 
   @Override

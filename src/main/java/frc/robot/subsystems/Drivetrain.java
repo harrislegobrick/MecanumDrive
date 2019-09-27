@@ -34,7 +34,7 @@ public class Drivetrain extends Subsystem {
     gyro.calibrate();
   }
 
-  public void driveStick(double ySpeed, double xSpeed, double zRotation, boolean oriented) {
+  public void stick(double ySpeed, double xSpeed, double zRotation, boolean oriented) {
     if (oriented) {
       rodot.driveCartesian(ySpeed, xSpeed, zRotation, gyro.getAngle());
     } else {
@@ -42,11 +42,11 @@ public class Drivetrain extends Subsystem {
     }
   }
 
-  public void driveAuton(double magnitude, double angle, double zRotation) {
+  public void auton(double magnitude, double angle, double zRotation) {
     rodot.drivePolar(magnitude, angle, zRotation);
   }
 
-  public void driveStop() {
+  public void stop() {
     rodot.stopMotor();
   }
 
