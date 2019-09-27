@@ -23,10 +23,10 @@ public class Drivetrain extends Subsystem {
   private ADXRS450_Gyro gyro;
 
   public Drivetrain() {
-    frontLeftMotor = new PWMVictorSPX(RobotMap.FRONTLEFTMOTOR);
-    frontRightMotor = new PWMVictorSPX(RobotMap.FRONTRIGHTMOTOR);
-    backLeftMotor = new PWMVictorSPX(RobotMap.BACKLEFTMOTOR);
-    backRightMotor = new PWMVictorSPX(RobotMap.BACKRIGHTMOTOR);
+    frontLeftMotor = new PWMVictorSPX(RobotMap.FRONT_LEFT_MOTOR);
+    frontRightMotor = new PWMVictorSPX(RobotMap.FRONT_RIGHT_MOTOR);
+    backLeftMotor = new PWMVictorSPX(RobotMap.BACK_LEFT_MOTOR);
+    backRightMotor = new PWMVictorSPX(RobotMap.BACK_RIGHT_MOTOR);
 
     rodot = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
 

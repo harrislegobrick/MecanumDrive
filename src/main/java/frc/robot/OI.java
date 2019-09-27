@@ -17,7 +17,7 @@ import frc.robot.commands.MeecanumDrive;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  private static Joystick stick = new Joystick(RobotMap.JOYPORT);
+  private static Joystick stick = new Joystick(RobotMap.JOY_PORT);
   private static Button fieldOriented, robotOriented;
 
   public static void init(){
@@ -30,15 +30,15 @@ public class OI {
 
   public double getJoyY() {
     double raw = stick.getY();
-    return Math.abs(raw) < RobotMap.JOYDEADZONE ? 0.0 : raw;
+    return Math.abs(raw) < RobotMap.JOY_DEADZONE ? 0.0 : raw;
   }
   public double getJoyX() {
     double raw = stick.getX();
-    return Math.abs(raw) < RobotMap.JOYDEADZONE ? 0.0 : raw;
+    return Math.abs(raw) < RobotMap.JOY_DEADZONE ? 0.0 : raw;
   }
   public double getJoyZ() {
     double raw = stick.getZ();
-    return Math.abs(raw) < RobotMap.JOYDEADZONE ? 0.0 : raw;
+    return Math.abs(raw) < RobotMap.JOY_DEADZONE ? 0.0 : raw;
   }
   public double getJoyThrottle(){
     return stick.getThrottle();
