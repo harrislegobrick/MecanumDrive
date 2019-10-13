@@ -10,7 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.MeecanumDrive;
+import frc.robot.commands.MecanumDriveWithStick;;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -24,8 +24,8 @@ public class OI {
     robotOriented = new JoystickButton(stick, 3);
     fieldOriented = new JoystickButton(stick, 4);
     
-    fieldOriented.whenPressed(new MeecanumDrive(true));
-    robotOriented.whenPressed(new MeecanumDrive());
+    fieldOriented.whenPressed(new MecanumDriveWithStick(true));
+    robotOriented.whenPressed(new MecanumDriveWithStick());
   }
 
   public double getJoyY() {

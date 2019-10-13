@@ -10,15 +10,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class MeecanumDrive extends Command {
+public class MecanumDriveWithStick extends Command {
   private boolean fieldOriented;
 
-  public MeecanumDrive(){
+  public MecanumDriveWithStick(){
     requires(Robot.drivetrain);
     fieldOriented = false;
   }
 
-  public MeecanumDrive(boolean fieldOriented) {
+  public MecanumDriveWithStick(boolean fieldOriented) {
     requires(Robot.drivetrain);
     this.fieldOriented = fieldOriented;
   }

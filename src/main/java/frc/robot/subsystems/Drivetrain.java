@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.RobotMap;
-import frc.robot.commands.MeecanumDrive;
+import frc.robot.commands.MecanumDriveWithStick;
 
 /**
  * Add your docs here.
@@ -60,6 +60,6 @@ public class Drivetrain extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new MeecanumDrive());
+    setDefaultCommand(new MecanumDriveWithStick());
   }
 }
