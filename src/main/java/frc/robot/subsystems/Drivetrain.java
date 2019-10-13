@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.MecanumDriveWithStick;
+import frc.robot.commands.MecanumDriveWithStick.Orientation;
 
 /**
  * Add your docs here.
@@ -34,12 +35,12 @@ public class Drivetrain extends Subsystem {
     gyro.calibrate();
   }
 
-  public void stick(double ySpeed, double xSpeed, double zRotation, boolean oriented) {
-    if (oriented) {
-      rodot.driveCartesian(ySpeed, xSpeed, zRotation, gyro.getAngle());
-    } else {
-      rodot.driveCartesian(ySpeed, xSpeed, zRotation);
-    }
+  public void stickRobot(double ySpeed, double xSpeed, double zRotation) {
+    rodot.driveCartesian(ySpeed, xSpeed, zRotation);
+  }
+
+  public void stickField(double ySpeed, double xSpeed, double zRotation) {
+    rodot.driveCartesian(ySpeed, xSpeed, zRotation, gyro.getAngle());
   }
 
   public void auton(double magnitude, double angle, double zRotation) {
@@ -60,6 +61,6 @@ public class Drivetrain extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new MecanumDriveWithStick());
+    setDefaultCommand(new MecanumDriveWithStick(Orientation.ROBOT));
   }
 }
