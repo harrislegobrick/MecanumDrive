@@ -10,7 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.MecanumDriveWithStick;;
+import frc.robot.commands.MecanumDriveWithStick;
+import frc.robot.commands.MecanumDriveWithStick.Orientation;;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -20,28 +21,30 @@ public class OI {
   private static Joystick stick = new Joystick(RobotMap.JOY_PORT);
   private static Button fieldOriented, robotOriented;
 
-  public static void init(){
+  public static void init() {
     robotOriented = new JoystickButton(stick, 3);
     fieldOriented = new JoystickButton(stick, 4);
-    
-    fieldOriented.whenPressed(new MecanumDriveWithStick(true));
-    robotOriented.whenPressed(new MecanumDriveWithStick());
+
+    fieldOriented.whenPressed(new MecanumDriveWithStick(Orientation.FIELD));
+    robotOriented.whenPressed(new MecanumDriveWithStick(Orientation.ROBOT));
   }
 
   public double getJoyY() {
     double raw = stick.getY();
     return Math.abs(raw) < RobotMap.JOY_DEADZONE ? 0.0 : raw;
   }
+
   public double getJoyX() {
     double raw = stick.getX();
     return Math.abs(raw) < RobotMap.JOY_DEADZONE ? 0.0 : raw;
   }
+
   public double getJoyZ() {
     double raw = stick.getZ();
     return Math.abs(raw) < RobotMap.JOY_DEADZONE ? 0.0 : raw;
   }
-  public double getJoyThrottle(){
+
+  public double getJoyThrottle() {
     return stick.getThrottle();
   }
-
 }
