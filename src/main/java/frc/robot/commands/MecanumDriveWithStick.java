@@ -11,28 +11,37 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class MecanumDriveWithStick extends Command {
-  private boolean fieldOriented;
-
-  public MecanumDriveWithStick(){
-    requires(Robot.drivetrain);
-    fieldOriented = false;
+  public enum Orientation {
+    ROBOT, FIELD
   }
 
-  public MecanumDriveWithStick(boolean fieldOriented) {
+  private Orientation orientation;
+
+  public MecanumDriveWithStick(Orientation orientation) {
     requires(Robot.drivetrain);
-    this.fieldOriented = fieldOriented;
+    this.orientation = orientation;
   }
 
   @Override
   protected void initialize() {
-    if (fieldOriented)
+    if (orientation == Orientation.FIELD)
       Robot.drivetrain.resetGyro();
   }
 
   @Override
   protected void execute() {
     double throttle = (1.0 - Robot.oi.getJoyThrottle()) / -2.0;
-    Robot.drivetrain.stick(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle, Robot.oi.getJoyZ() * throttle, fieldOriented);
+    double x = Robot.oi.getJoyX() * throttle;
+    double y = Robot.oi.getJoyY() * throttle;
+    double z = Robot.oi.getJoyZ() * throttle;
+    switch (orientation) {
+    case ROBOT:
+      Robot.drivetrain.stickRobot(y, x, z);
+      break;
+    case FIELD:
+      Robot.drivetrain.stickField(y, x, z);
+      break;
+    }
   }
 
   @Override
