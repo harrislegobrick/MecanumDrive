@@ -17,7 +17,7 @@ public class DriveStraight extends TimedCommand {
   
   private DDirection direction;
   private double driveSpeed, error, initalHeading, driveDirection;
-  private double kP = 0.1;
+  private double kP = 0.05;
 
   public DriveStraight(double time, double driveSpeed, DDirection direction) {
     super(time);
