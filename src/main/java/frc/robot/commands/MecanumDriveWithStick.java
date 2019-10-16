@@ -31,15 +31,15 @@ public class MecanumDriveWithStick extends Command {
   @Override
   protected void execute() {
     double throttle = (1.0 - Robot.oi.getJoyThrottle()) / -2.0;
-    double x = Robot.oi.getJoyX() * throttle;
+    double x = -Robot.oi.getJoyX() * throttle;
     double y = Robot.oi.getJoyY() * throttle;
-    double z = Robot.oi.getJoyZ() * throttle;
+    double z = -Robot.oi.getJoyZ() * throttle * 0.5;
     switch (orientation) {
     case ROBOT:
-      Robot.drivetrain.stickRobot(y, x, z);
+      Robot.drivetrain.stickRobot(x, y, z);
       break;
     case FIELD:
-      Robot.drivetrain.stickField(y, x, z);
+      Robot.drivetrain.stickField(x, y, z);
       break;
     }
   }
