@@ -40,7 +40,7 @@ public class Drivetrain extends Subsystem {
   }
 
   public void stickField(double ySpeed, double xSpeed, double zRotation) {
-    rodot.driveCartesian(ySpeed, xSpeed, zRotation, gyro.getAngle());
+    rodot.driveCartesian(ySpeed, xSpeed, zRotation, -gyro.getAngle());
   }
 
   public void auton(double magnitude, double angle, double zRotation) {
