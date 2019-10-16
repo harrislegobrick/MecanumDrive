@@ -33,7 +33,7 @@ public class MecanumDriveWithStick extends Command {
     double throttle = (1.0 - Robot.oi.getJoyThrottle()) / -2.0;
     double x = -Robot.oi.getJoyX() * throttle;
     double y = Robot.oi.getJoyY() * throttle;
-    double z = -Robot.oi.getJoyZ() * throttle * 0.5;
+    double z = -Robot.oi.getJoyZ() * throttle * 0.7;
     switch (orientation) {
     case ROBOT:
       Robot.drivetrain.stickRobot(x, y, z);
