@@ -17,8 +17,9 @@ public class SimpleAuton extends CommandGroup {
    */
   public SimpleAuton() {
     // Add Commands here:
-    addSequential(new DriveStraight(2, 0.6, DDirection.FORWARD));
+    addSequential(new DriveStraight(2, 0.2, DDirection.FORWARD));
     addSequential(new RotateBot(90, RDirection.LEFT));
+    addSequential(new DriveStraight(1, 0.3, DDirection.BACKWARD));
 
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
