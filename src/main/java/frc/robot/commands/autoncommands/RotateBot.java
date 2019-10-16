@@ -17,7 +17,7 @@ public class RotateBot extends Command {
 
   private RDirection direction;
   private double degrees, initalHeading;
-  private double turnSpeed = 0.6;
+  private double turnSpeed = 0.4;
   private double turnExactness = 1.0;
 
   public RotateBot(double degrees, RDirection direction) {
@@ -33,12 +33,12 @@ public class RotateBot extends Command {
 
   @Override
   protected void execute() {
-    Robot.drivetrain.auton(0.0, 0.0, (direction == RDirection.RIGHT ? turnSpeed : -turnSpeed));
+    Robot.drivetrain.auton(0.3, 0.0, (direction == RDirection.LEFT ? -turnSpeed : turnSpeed));
   }
 
   @Override
   protected boolean isFinished() {
-    return (initalHeading + Robot.drivetrain.getGyroo()) >= ((initalHeading + (direction == RDirection.RIGHT ? degrees : -degrees)) * turnExactness);
+    return (initalHeading + Robot.drivetrain.getGyroo()) >= ((initalHeading + (direction == RDirection.RIGHT ? -degrees : degrees)) * turnExactness);
   }
 
   @Override
