@@ -22,7 +22,7 @@ public class DriveStraight extends TimedCommand {
   private double kI = 0.01;
   private double kD = 0.04;
   private double turn;
-  PIDCommand test = new PIDCommand(kP, kI, kD) {
+  private PIDCommand thePID = new PIDCommand(kP, kI, kD) {
   
     @Override
     protected boolean isFinished() {
@@ -49,7 +49,7 @@ public class DriveStraight extends TimedCommand {
 
   @Override
   protected void initialize() {
-    test.start();
+    thePID.start();
     switch(direction){
       case FORWARD : 
       driveDirection = 0;
@@ -73,8 +73,8 @@ public class DriveStraight extends TimedCommand {
 
   @Override
   protected void end() {
-    test.cancel();
-    test.close();
+    thePID.cancel();
+    thePID.close();
     Robot.drivetrain.stop();
   }
 
