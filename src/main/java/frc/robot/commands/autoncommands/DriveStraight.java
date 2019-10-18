@@ -7,6 +7,7 @@
 
 package frc.robot.commands.autoncommands;
 
+import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
@@ -16,8 +17,28 @@ public class DriveStraight extends TimedCommand {
   }
   
   private DDirection direction;
-  private double driveSpeed, error, initalHeading, driveDirection;
+  private double driveSpeed, driveDirection;
   private double kP = 0.05;
+  private double kI = 0.01;
+  private double kD = 0.04;
+  private double turn;
+  PIDCommand test = new PIDCommand(kP, kI, kD) {
+  
+    @Override
+    protected boolean isFinished() {
+      return false;
+    }
+  
+    @Override
+    protected void usePIDOutput(double output) {
+      turn = output;
+    }
+  
+    @Override
+    protected double returnPIDInput() {
+      return Robot.drivetrain.getGyroo();
+    }
+  };
 
   public DriveStraight(double time, double driveSpeed, DDirection direction) {
     super(time);
@@ -28,7 +49,7 @@ public class DriveStraight extends TimedCommand {
 
   @Override
   protected void initialize() {
-    initalHeading = Robot.drivetrain.getGyroo();
+    test.start();
     switch(direction){
       case FORWARD : 
       driveDirection = 0;
@@ -47,12 +68,13 @@ public class DriveStraight extends TimedCommand {
 
   @Override
   protected void execute() {
-    error = initalHeading - Robot.drivetrain.getGyroo();
-    Robot.drivetrain.auton(driveSpeed, driveDirection, error * kP);
+    Robot.drivetrain.auton(driveSpeed, driveDirection, turn);
   }
 
   @Override
   protected void end() {
+    test.cancel();
+    test.close();
     Robot.drivetrain.stop();
   }
 
