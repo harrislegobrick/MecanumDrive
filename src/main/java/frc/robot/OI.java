@@ -30,18 +30,15 @@ public class OI {
   }
 
   public double getJoyY() {
-    double raw = stick.getY();
-    return Math.abs(raw) < RobotMap.JOY_DEADZONE ? 0.0 : raw;
+    return stick.getY();
   }
 
   public double getJoyX() {
-    double raw = stick.getX();
-    return Math.abs(raw) < RobotMap.JOY_DEADZONE ? 0.0 : raw;
+    return stick.getX();
   }
 
   public double getJoyZ() {
-    double raw = stick.getZ();
-    return Math.abs(raw) < RobotMap.JOY_DEADZONE ? 0.0 : raw;
+    return stick.getZ();
   }
 
   public double getJoyThrottle() {
