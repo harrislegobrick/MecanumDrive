@@ -30,6 +30,7 @@ public class Drivetrain extends Subsystem {
     backRightMotor = new PWMVictorSPX(RobotMap.BACK_RIGHT_MOTOR);
 
     rodot = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
+    rodot.setDeadband(RobotMap.JOY_DEADZONE);
 
     gyro = new ADXRS450_Gyro();
     gyro.calibrate();
