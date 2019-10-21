@@ -38,6 +38,7 @@ public class RotateBot extends Command {
 
   @Override
   protected boolean isFinished() {
+    // try changing the   + to a -
     return (initalHeading + Robot.drivetrain.getGyroo()) >= ((initalHeading + (direction == RDirection.RIGHT ? -degrees : degrees)) * turnExactness);
   }
 
