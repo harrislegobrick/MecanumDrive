@@ -9,20 +9,20 @@ package frc.robot.commands.autoncommands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
-import frc.robot.commands.autoncommands.DriveStraight.DDirection;
-import frc.robot.commands.autoncommands.RotateBot.RDirection;;
+import frc.robot.commands.autoncommands.DriveStraight.Drive;
+import frc.robot.commands.autoncommands.RotateBot.Rotate;;
 
 public class SimpleAuton extends CommandGroup {
   /**
-   * Add your docs here.
+   * testing auton driveing and rotating
    */
   public SimpleAuton() {
     // Add Commands here:
-    addSequential(new DriveStraight(2, 0.2, DDirection.FORWARD));
+    addSequential(new DriveStraight(2, 0.2, Drive.FORWARD));
     addSequential(new WaitCommand(0.5));
-    addSequential(new RotateBot(90, RDirection.LEFT));
+    addSequential(new RotateBot(90, Rotate.COUNTER_CLOCKWISE));
     addSequential(new WaitCommand(0.5));
-    addSequential(new DriveStraight(2, 0.2, DDirection.RIGHT));
+    addSequential(new DriveStraight(2, 0.2, Drive.RIGHT));
 
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
