@@ -7,11 +7,6 @@
 
 package frc.robot.commands.autoncommands;
 
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDSourceType;
-import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
@@ -21,10 +16,12 @@ public class DriveStraight extends TimedCommand {
   }
 
   private DDirection direction;
-  private double driveSpeed, driveDirection, turn;
-  private double kP = 0.05;
-  private double kI = 0.01;
-  private double kD = 0.04;
+  private double driveSpeed, driveDirection, turn, initalHeading, error, derevative;
+  private double integral, previousError = 0;
+  private final double kP = 0.05;
+  private final double kI = 0.01;
+  private final double kD = 0.04;
+  private final double timerValue = 0.02;
 
   public DriveStraight(double time, double driveSpeed, DDirection direction) {
     super(time);
@@ -33,8 +30,9 @@ public class DriveStraight extends TimedCommand {
     this.direction = direction;
   }
 
-  @Override 
+  @Override
   protected void initialize() {
+    initalHeading = Robot.drivetrain.getGyroo();
     switch (direction) {
     case FORWARD:
       driveDirection = 0;
@@ -53,7 +51,13 @@ public class DriveStraight extends TimedCommand {
 
   @Override
   protected void execute() {
+    error = initalHeading - Robot.drivetrain.getGyroo();
+    integral += (error * timerValue);
+    derevative = (error - previousError) / timerValue;
+
+    turn = error * kP + integral * kI + derevative * kD;
     Robot.drivetrain.auton(driveSpeed, driveDirection, turn);
+    previousError = error;
   }
 
   @Override
