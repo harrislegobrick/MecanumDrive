@@ -17,11 +17,10 @@ public class DriveStraight extends TimedCommand {
   }
   
   private DDirection direction;
-  private double driveSpeed, driveDirection;
+  private double driveSpeed, driveDirection, turn;
   private double kP = 0.05;
   private double kI = 0.01;
   private double kD = 0.04;
-  private double turn;
   private PIDCommand thePID = new PIDCommand(kP, kI, kD) {
   
     @Override
