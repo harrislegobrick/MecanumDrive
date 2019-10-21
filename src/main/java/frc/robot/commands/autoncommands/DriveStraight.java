@@ -7,59 +7,45 @@
 
 package frc.robot.commands.autoncommands;
 
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
 public class DriveStraight extends TimedCommand {
-  public enum DDirection{
+  public enum DDirection {
     FORWARD, BACKWARD, LEFT, RIGHT
   }
-  
+
   private DDirection direction;
   private double driveSpeed, driveDirection, turn;
   private double kP = 0.05;
   private double kI = 0.01;
   private double kD = 0.04;
-  private PIDCommand thePID = new PIDCommand(kP, kI, kD) {
-  
-    @Override
-    protected boolean isFinished() {
-      return false;
-    }
-  
-    @Override
-    protected void usePIDOutput(double output) {
-      turn = output;
-    }
-  
-    @Override
-    protected double returnPIDInput() {
-      return Robot.drivetrain.getGyroo();
-    }
-  };
 
   public DriveStraight(double time, double driveSpeed, DDirection direction) {
     super(time);
     requires(Robot.drivetrain);
     this.driveSpeed = Math.abs(driveSpeed);
-    this.direction = direction; 
+    this.direction = direction;
   }
 
-  @Override
+  @Override 
   protected void initialize() {
-    thePID.start();
-    switch(direction){
-      case FORWARD : 
+    switch (direction) {
+    case FORWARD:
       driveDirection = 0;
       break;
-      case BACKWARD : 
+    case BACKWARD:
       driveDirection = 180;
       break;
-      case LEFT : 
+    case LEFT:
       driveDirection = -90;
       break;
-      case RIGHT : 
+    case RIGHT:
       driveDirection = 90;
       break;
     }
@@ -72,8 +58,6 @@ public class DriveStraight extends TimedCommand {
 
   @Override
   protected void end() {
-    thePID.cancel();
-    thePID.close();
     Robot.drivetrain.stop();
   }
 
