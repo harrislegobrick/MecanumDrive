@@ -15,10 +15,10 @@ package frc.robot;
  */
 public class RobotMap {
   // motors 
-  public static final int FRONTLEFTMOTOR = 1;
-  public static final int FRONTRIGHTMOTOR = 2;
-  public static final int BACKLEFTMOTOR = 3;
-  public static final int BACKRIGHTMOTOR = 4;
+  public static final int FRONT_LEFT_MOTOR = 9;
+  public static final int FRONT_RIGHT_MOTOR = 7;
+  public static final int BACK_LEFT_MOTOR = 8;
+  public static final int BACK_RIGHT_MOTOR = 6;
 
   // input
   public static final int JOY_PORT = 2;
