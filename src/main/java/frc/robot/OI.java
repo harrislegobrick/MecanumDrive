@@ -11,7 +11,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.MecanumDriveWithStick;
-import frc.robot.commands.MecanumDriveWithStick.Orientation;;
+import frc.robot.commands.MecanumDriveWithStick.Orientation;
+import frc.robot.commands.autoncommands.LimelightTrackToTarget;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -19,20 +21,24 @@ import frc.robot.commands.MecanumDriveWithStick.Orientation;;
  */
 public class OI {
   private static Joystick stick = new Joystick(RobotMap.JOY_PORT);
-  private static Button fieldOriented, robotOriented;
+  private static Button fieldOriented, robotOriented, trackToTarget;
+
 
   public static void init() {
     robotOriented = new JoystickButton(stick, 3);
     fieldOriented = new JoystickButton(stick, 4);
-
+    trackToTarget = new JoystickButton(stick, 5);
+    
+   
     fieldOriented.whenPressed(new MecanumDriveWithStick(Orientation.FIELD));
     robotOriented.whenPressed(new MecanumDriveWithStick(Orientation.ROBOT));
+    trackToTarget.whileHeld(new LimelightTrackToTarget());
   }
 
   public double getJoyY() {
     return stick.getY();
   }
-
+  
   public double getJoyX() {
     return stick.getX();
   }
