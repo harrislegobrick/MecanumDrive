@@ -22,4 +22,5 @@ public class RobotMap {
 
   // input
   public static final int JOY_PORT = 0;
+  public static final double JOY_DEADZONE = 0.05;
 }
