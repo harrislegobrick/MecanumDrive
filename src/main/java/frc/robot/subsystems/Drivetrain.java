@@ -12,7 +12,8 @@ import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.RobotMap;
-import frc.robot.commands.MeecanumDrive;
+import frc.robot.commands.MecanumDriveWithStick;
+import frc.robot.commands.MecanumDriveWithStick.Orientation;
 
 /**
  * Add your docs here.
@@ -29,24 +30,25 @@ public class Drivetrain extends Subsystem {
     backRightMotor = new PWMVictorSPX(RobotMap.BACK_RIGHT_MOTOR);
 
     rodot = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
+    rodot.setDeadband(RobotMap.JOY_DEADZONE);
 
     gyro = new ADXRS450_Gyro();
     gyro.calibrate();
   }
 
-  public void driveStick(double ySpeed, double xSpeed, double zRotation, boolean oriented) {
-    if (oriented) {
-      rodot.driveCartesian(ySpeed, xSpeed, zRotation, gyro.getAngle());
-    } else {
-      rodot.driveCartesian(ySpeed, xSpeed, zRotation);
-    }
+  public void stickRobot(double ySpeed, double xSpeed, double zRotation) {
+    rodot.driveCartesian(ySpeed, xSpeed, zRotation);
   }
 
-  public void driveAuton(double magnitude, double angle, double zRotation) {
+  public void stickField(double ySpeed, double xSpeed, double zRotation) {
+    rodot.driveCartesian(ySpeed, xSpeed, zRotation, -gyro.getAngle());
+  }
+
+  public void auton(double magnitude, double angle, double zRotation) {
     rodot.drivePolar(magnitude, angle, zRotation);
   }
 
-  public void driveStop() {
+  public void stop() {
     rodot.stopMotor();
   }
 
@@ -60,6 +62,6 @@ public class Drivetrain extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new MeecanumDrive(false));
+    setDefaultCommand(new MecanumDriveWithStick(Orientation.ROBOT));
   }
 }

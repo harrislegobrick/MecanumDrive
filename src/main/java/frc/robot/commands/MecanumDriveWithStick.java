@@ -10,24 +10,38 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class MeecanumDrive extends Command {
-  private boolean fieldOriented;
+public class MecanumDriveWithStick extends Command {
+  public enum Orientation {
+    ROBOT, FIELD
+  }
 
-  public MeecanumDrive(boolean fieldOriented) {
+  private Orientation orientation;
+
+  public MecanumDriveWithStick(Orientation orientation) {
     requires(Robot.drivetrain);
-    this.fieldOriented = fieldOriented;
+    this.orientation = orientation;
   }
 
   @Override
   protected void initialize() {
-    if (fieldOriented)
+    if (orientation == Orientation.FIELD)
       Robot.drivetrain.resetGyro();
   }
 
   @Override
   protected void execute() {
-    double throttle = (1.0 - Robot.oi.getJoyThrottle()) / -2.0;
-    Robot.drivetrain.driveStick(Robot.oi.getJoyY() * throttle, Robot.oi.getJoyX() * throttle, Robot.oi.getJoyZ() * throttle, fieldOriented);
+    double throttle = (1.0 - Robot.oi.getJoyThrottle()) / 2.0;
+    double x = Robot.oi.getJoyX() * throttle;
+    double y = -Robot.oi.getJoyY() * throttle;
+    double z = Robot.oi.getJoyZ() * throttle * 0.7;
+    switch (orientation) {
+    case ROBOT:
+      Robot.drivetrain.stickRobot(x, y, z);
+      break;
+    case FIELD:
+      Robot.drivetrain.stickField(x, y, z);
+      break;
+    }
   }
 
   @Override
@@ -37,7 +51,7 @@ public class MeecanumDrive extends Command {
 
   @Override
   protected void end() {
-    Robot.drivetrain.driveStop();
+    Robot.drivetrain.stop();
   }
 
   @Override

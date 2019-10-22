@@ -10,36 +10,45 @@ package frc.robot.commands.autoncommands;
 import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
+/**
+ * Used to drive the robot for a time at a speed in a direction.
+ * <ul>
+ * <li><b>time</b> : How long it should run in seconds.</li>
+ * <li><b>driveSpeed</b> : The speed at which it should run (0 to 1).</li>
+ * <li><b>direction</b> : The direction it should drive (forward, backward,
+ * left, and right).</li>
+ * </ul>
+ */
 public class DriveStraight extends TimedCommand {
-  public enum DDirection{
+  public enum Drive {
     FORWARD, BACKWARD, LEFT, RIGHT
   }
-  
-  private DDirection direction;
-  private double driveSpeed, error, initalHeading, driveDirection;
-  private double kP = 0.1;
 
-  public DriveStraight(double time, double driveSpeed, DDirection direction) {
+  private Drive direction;
+  private double driveSpeed, error, initalHeading, driveDirection;
+  private double kP = 0.05;
+
+  public DriveStraight(double time, double driveSpeed, Drive direction) {
     super(time);
     requires(Robot.drivetrain);
     this.driveSpeed = Math.abs(driveSpeed);
-    this.direction = direction; 
+    this.direction = direction;
   }
 
   @Override
   protected void initialize() {
     initalHeading = Robot.drivetrain.getGyroo();
-    switch(direction){
-      case FORWARD : 
+    switch (direction) {
+    case FORWARD:
       driveDirection = 0;
       break;
-      case BACKWARD : 
+    case BACKWARD:
       driveDirection = 180;
       break;
-      case LEFT : 
+    case LEFT:
       driveDirection = -90;
       break;
-      case RIGHT : 
+    case RIGHT:
       driveDirection = 90;
       break;
     }
@@ -48,12 +57,12 @@ public class DriveStraight extends TimedCommand {
   @Override
   protected void execute() {
     error = initalHeading - Robot.drivetrain.getGyroo();
-    Robot.drivetrain.driveAuton(driveSpeed, driveDirection, error * kP);
+    Robot.drivetrain.auton(driveSpeed, driveDirection, error * kP);
   }
 
   @Override
   protected void end() {
-    Robot.drivetrain.driveStop();
+    Robot.drivetrain.stop();
   }
 
   @Override
