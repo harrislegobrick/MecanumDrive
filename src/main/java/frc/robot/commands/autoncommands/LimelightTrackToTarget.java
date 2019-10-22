@@ -32,7 +32,7 @@ public class LimelightTrackToTarget extends Command {
     zRotation = angle / 20.0;
 
     if (Robot.limelight.getAvalible())
-      Robot.drivetrain.driveAuton(magnitude, angle, zRotation);
+      Robot.drivetrain.auton(magnitude, angle, zRotation);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -44,7 +44,7 @@ public class LimelightTrackToTarget extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.drivetrain.driveStop();
+    Robot.drivetrain.stop();
     Robot.limelight.setDriving();
   }
 
