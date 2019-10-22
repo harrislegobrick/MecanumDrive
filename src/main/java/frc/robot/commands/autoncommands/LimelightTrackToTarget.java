@@ -12,7 +12,8 @@ import frc.robot.Robot;
 
 public class LimelightTrackToTarget extends Command {
   private double angle, zRotation;
-  private double magnitude = 0.5; // Robot.limelight.getArea() * 0.2; gotta figure out what the area would be first
+  private double magnitude = 0.3; // Robot.limelight.getArea() * 0.2; gotta figure out what the area would be
+  private final double kP = 0.04;
 
   public LimelightTrackToTarget() {
     requires(Robot.limelight);
@@ -29,7 +30,7 @@ public class LimelightTrackToTarget extends Command {
   @Override
   protected void execute() {
     angle = Robot.limelight.getX();
-    zRotation = angle / 20.0;
+    zRotation = angle * kP;
 
     if (Robot.limelight.getAvalible())
       Robot.drivetrain.auton(magnitude, angle, zRotation);
