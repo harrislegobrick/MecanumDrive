@@ -41,15 +41,12 @@ public class RotateBot extends Command {
 
   @Override
   protected void execute() {
-    Robot.drivetrain.auton(0.3, 0.0, (direction == Rotate.COUNTER_CLOCKWISE ? -turnSpeed : turnSpeed));
+    Robot.drivetrain.auton(0.0, 0.0, (direction == Rotate.COUNTER_CLOCKWISE ? -turnSpeed : turnSpeed));
   }
 
   @Override
   protected boolean isFinished() {
-    // try changing the + to a -
-    return (initalHeading
-        + Robot.drivetrain.getGyroo()) >= ((initalHeading + (direction == Rotate.CLOCKWISE ? -degrees : degrees))
-            * turnExactness);
+    return (initalHeading + Robot.drivetrain.getGyroo()) >= ((initalHeading + (direction == Rotate.CLOCKWISE ? degrees : -degrees)) * turnExactness);
   }
 
   @Override
