@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autoncommands.ChaChaSlide;
 import frc.robot.commands.autoncommands.SimpleAuton;
+import frc.robot.commands.autoncommands.SimpleAuton2;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Limelight;
 
@@ -46,6 +47,7 @@ public class Robot extends TimedRobot {
     
     chooser.setDefaultOption("Default Auto", new SimpleAuton());
     chooser.addOption("Test Auto", new SimpleAuton());
+    chooser.addOption("test auto 2", new SimpleAuton2());
     chooser.addOption("Cha Cha Slide", new ChaChaSlide());
     SmartDashboard.putData("Auto mode", chooser);
   }
