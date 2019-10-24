@@ -25,8 +25,8 @@ public class RotateBot extends Command {
 
   private Rotate direction;
   private double degrees, initalHeading;
-  private double turnSpeed = 0.4;
-  private double turnExactness = 1.0;
+  private double turnSpeed = 0.3;
+  private double turnExactness = 0.96;
 
   public RotateBot(double degrees, Rotate direction) {
     requires(Robot.drivetrain);
@@ -41,7 +41,7 @@ public class RotateBot extends Command {
 
   @Override
   protected void execute() {
-    Robot.drivetrain.auton(0.0, 0.0, (direction == Rotate.COUNTER_CLOCKWISE ? -turnSpeed : turnSpeed));
+    Robot.drivetrain.auton(0.0, 0.0, (direction == Rotate.CLOCKWISE ? turnSpeed : -turnSpeed));
   }
 
   @Override
