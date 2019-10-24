@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.CalibrateLimelight;
 import frc.robot.commands.MecanumDriveWithStick;
 import frc.robot.commands.MecanumDriveWithStick.Orientation;
 import frc.robot.commands.autoncommands.LimelightTrackToTarget;
@@ -21,18 +22,20 @@ import frc.robot.commands.autoncommands.LimelightTrackToTarget;
  */
 public class OI {
   private static Joystick stick = new Joystick(RobotMap.JOY_PORT);
-  private static Button fieldOriented, robotOriented, trackToTarget;
+  private static Button fieldOriented, robotOriented, trackToTarget, calibrateLimelight;
 
 
   public static void init() {
     robotOriented = new JoystickButton(stick, 3);
     fieldOriented = new JoystickButton(stick, 4);
     trackToTarget = new JoystickButton(stick, 5);
+    calibrateLimelight = new JoystickButton(stick, 6);
     
    
     fieldOriented.whenPressed(new MecanumDriveWithStick(Orientation.FIELD));
     robotOriented.whenPressed(new MecanumDriveWithStick(Orientation.ROBOT));
     trackToTarget.whileHeld(new LimelightTrackToTarget());
+    calibrateLimelight.toggleWhenPressed(new CalibrateLimelight());
   }
 
   public double getJoyY() {
