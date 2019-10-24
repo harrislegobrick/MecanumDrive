@@ -22,6 +22,8 @@ public class SimpleAuton2 extends CommandGroup {
     addSequential(new RotateBot2(90, Rotate.COUNTER_CLOCKWISE));
     addSequential(new WaitCommand(0.5));
     addSequential(new DriveStraight(2, 0.2, Drive.RIGHT));
+    addSequential(new WaitCommand(0.5));
+    addSequential(new RotateBot2(90, Rotate.CLOCKWISE));
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
