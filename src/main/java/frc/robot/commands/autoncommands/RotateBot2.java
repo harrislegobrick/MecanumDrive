@@ -41,9 +41,8 @@ public class RotateBot2 extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (initalHeading
-        + Robot.drivetrain.getGyroo()) >= ((initalHeading + (direction == Rotate.CLOCKWISE ? degrees : -degrees))
-            * exactness);
+    return (Robot.drivetrain.getGyroo()
+        - initalHeading) >= ((initalHeading + (direction == Rotate.CLOCKWISE ? degrees : -degrees)) * exactness);
   }
 
   // Called once after isFinished returns true
