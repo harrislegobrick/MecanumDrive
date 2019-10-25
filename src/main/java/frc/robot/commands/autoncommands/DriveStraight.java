@@ -50,7 +50,7 @@ public class DriveStraight extends TimedCommand {
 
   @Override
   protected void execute() {
-    error = initalHeading - Robot.drivetrain.getGyroo();
+    error = Robot.drivetrain.getGyroo() - initalHeading;
     integral += (error * Robot.kDefaultPeriod);
     derevative = (error - previousError) / Robot.kDefaultPeriod;
 
