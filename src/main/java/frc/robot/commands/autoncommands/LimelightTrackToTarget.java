@@ -31,6 +31,7 @@ public class LimelightTrackToTarget extends Command {
   protected void execute() {
     angle = Robot.limelight.getX();
     zRotation = angle * kP;
+    magnitude -= Math.pow((0.07 * Math.pow(Math.abs(angle), 0.7)), 2);
 
     if (Robot.limelight.getAvalible())
       Robot.drivetrain.auton(magnitude, angle, zRotation);
