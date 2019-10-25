@@ -10,23 +10,20 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
 public class CalibrateLimelight extends Command {
   /**
-   * Add your docs here.
+   * Turns on the tracking but doens't do anything with the tracking data. Used
+   * for trying to calibrate the limelight.
    */
   public CalibrateLimelight() {
-    super();
     requires(Robot.limelight);
   }
 
-  // Called once when the command executes
   @Override
   protected void initialize() {
     Robot.limelight.setTracking();
   }
+
   @Override
   protected void execute() {
   }
@@ -35,10 +32,12 @@ public class CalibrateLimelight extends Command {
   protected boolean isFinished() {
     return false;
   }
+
   @Override
   protected void end() {
     Robot.limelight.setDriving();
   }
+
   @Override
   protected void interrupted() {
     end();
