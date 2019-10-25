@@ -21,7 +21,6 @@ public class DriveStraight extends TimedCommand {
   private final double kP = 0.05;
   private final double kI = 0.01;
   private final double kD = 0.04;
-  private final double timerValue = 0.02;
 
   public DriveStraight(double time, double driveSpeed, DDirection direction) {
     super(time);
@@ -52,8 +51,8 @@ public class DriveStraight extends TimedCommand {
   @Override
   protected void execute() {
     error = initalHeading - Robot.drivetrain.getGyroo();
-    integral += (error * timerValue);
-    derevative = (error - previousError) / timerValue;
+    integral += (error * Robot.kDefaultPeriod);
+    derevative = (error - previousError) / Robot.kDefaultPeriod;
 
     turn = error * kP + integral * kI + derevative * kD;
     Robot.drivetrain.auton(driveSpeed, driveDirection, turn);
