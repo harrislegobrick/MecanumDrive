@@ -10,15 +10,6 @@ package frc.robot.commands.autoncommands;
 import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
-/**
- * Used to drive the robot for a time at a speed in a direction.
- * <ul>
- * <li><b>time</b> : How long it should run in seconds.</li>
- * <li><b>driveSpeed</b> : The speed at which it should run (0 to 1).</li>
- * <li><b>direction</b> : The direction it should drive (forward, backward,
- * left, and right).</li>
- * </ul>
- */
 public class DriveStraight extends TimedCommand {
   public enum Drive {
     FORWARD, BACKWARD, LEFT, RIGHT
@@ -28,6 +19,15 @@ public class DriveStraight extends TimedCommand {
   private double driveSpeed, error, initalHeading, driveDirection;
   private double kP = 0.05;
 
+  /**
+   * Used to drive the robot for a time at a speed in a direction.
+   * <ul>
+   * <li><b>time</b> : How long it should run in seconds.</li>
+   * <li><b>driveSpeed</b> : The speed at which it should run (0 to 1).</li>
+   * <li><b>direction</b> : The direction it should drive (forward, backward,
+   * left, and right).</li>
+   * </ul>
+   */
   public DriveStraight(double time, double driveSpeed, Drive direction) {
     super(time);
     requires(Robot.drivetrain);

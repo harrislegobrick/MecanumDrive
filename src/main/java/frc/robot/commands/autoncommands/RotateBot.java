@@ -10,14 +10,6 @@ package frc.robot.commands.autoncommands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/**
- * Used to rotate the bot a certain degrees.
- * <ul>
- * <li><b>degrees</b> : The degrees the robot should turn to.</li>
- * <li><b>direction</b> : Whether it should rotate clockwise or counter
- * clockwise.</li>
- * </ul>
- */
 public class RotateBot extends Command {
   public enum Rotate {
     CLOCKWISE, COUNTER_CLOCKWISE
@@ -28,6 +20,14 @@ public class RotateBot extends Command {
   private double turnSpeed = 0.3;
   private double turnExactness = 0.96;
 
+  /**
+   * Used to rotate the bot a certain degrees.
+   * <ul>
+   * <li><b>degrees</b> : The degrees the robot should turn to.</li>
+   * <li><b>direction</b> : Whether it should rotate clockwise or counter
+   * clockwise.</li>
+   * </ul>
+   */
   public RotateBot(double degrees, Rotate direction) {
     requires(Robot.drivetrain);
     this.degrees = degrees;
@@ -46,7 +46,9 @@ public class RotateBot extends Command {
 
   @Override
   protected boolean isFinished() {
-    return (initalHeading + Robot.drivetrain.getGyroo()) >= ((initalHeading + (direction == Rotate.CLOCKWISE ? degrees : -degrees)) * turnExactness);
+    return (initalHeading
+        + Robot.drivetrain.getGyroo()) >= ((initalHeading + (direction == Rotate.CLOCKWISE ? degrees : -degrees))
+            * turnExactness);
   }
 
   @Override
