@@ -11,9 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class LimelightTrackToTarget extends Command {
-  private double angle, zRotation;
-  private double magnitude = 0.3; // Robot.limelight.getArea() * 0.2; gotta figure out what the area would be
-  private final double kP = 0.04;
+  private double angle, zRotation; // Robot.limelight.getArea() * 0.2; gotta figure out what the area would be
+  private final double kP = 0.03;
 
   public LimelightTrackToTarget() {
     requires(Robot.limelight);
@@ -29,6 +28,7 @@ public class LimelightTrackToTarget extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    double magnitude = 0.2;
     angle = Robot.limelight.getX();
     zRotation = angle * kP;
     magnitude -= Math.pow((0.07 * Math.pow(Math.abs(angle), 0.7)), 2);
