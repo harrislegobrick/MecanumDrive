@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.RobotMap;
@@ -21,7 +20,6 @@ import frc.robot.commands.MecanumDriveWithStick.Orientation;
  */
 public class Drivetrain extends Subsystem {
   private PWMVictorSPX frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
-  private SpeedControllerGroup leftSide, rightSide;
   private MecanumDrive rodot;
   private ADXRS450_Gyro gyro;
 
@@ -30,9 +28,6 @@ public class Drivetrain extends Subsystem {
     frontRightMotor = new PWMVictorSPX(RobotMap.FRONT_RIGHT_MOTOR);
     backLeftMotor = new PWMVictorSPX(RobotMap.BACK_LEFT_MOTOR);
     backRightMotor = new PWMVictorSPX(RobotMap.BACK_RIGHT_MOTOR);
-
-    leftSide = new SpeedControllerGroup(frontLeftMotor, backLeftMotor);
-    rightSide = new SpeedControllerGroup(frontRightMotor, backRightMotor);
 
     rodot = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
 
@@ -52,11 +47,6 @@ public class Drivetrain extends Subsystem {
 
   public void auton(double magnitude, double angle, double zRotation) {
     rodot.drivePolar(magnitude, angle, zRotation);
-  }
-
-  public void rotate(double speed){
-    leftSide.set(speed);
-    rightSide.set(-speed);
   }
 
   public void stop() {
