@@ -16,7 +16,7 @@ public class RotateBot extends Command {
   }
 
   private Rotate direction;
-  private double degrees, initalHeading, error, previousError, derivative, turnSpeed;
+  private double degrees, desiredDegrees, previousError;
   private double turnExactness = 1.0;
   private double kP = 0.01;
   private double kD = 0.005;
@@ -37,13 +37,15 @@ public class RotateBot extends Command {
 
   @Override
   protected void initialize() {
-    initalHeading = Robot.drivetrain.getGyroo();
+    desiredDegrees = Math.abs(Robot.drivetrain.getGyroo()) + (direction == Rotate.CLOCKWISE ? degrees : -degrees);
   }
 
   @Override
   protected void execute() {
-    turnSpeed = 0;
-    error = (initalHeading + (direction == Rotate.CLOCKWISE ? -degrees : degrees)) - Robot.drivetrain.getGyroo();
+    double error, derivative;
+    double turnSpeed = 0;
+
+    error = desiredDegrees - Robot.drivetrain.getGyroo();
     derivative = (previousError - error) / Robot.kDefaultPeriod;
     turnSpeed = error * kP + derivative * kD;
     Robot.drivetrain.auton(0.0, 0.0, (direction == Rotate.CLOCKWISE ? turnSpeed : -turnSpeed));
@@ -52,9 +54,7 @@ public class RotateBot extends Command {
 
   @Override
   protected boolean isFinished() {
-    return (initalHeading
-        - Robot.drivetrain.getGyroo()) >= ((initalHeading + (direction == Rotate.CLOCKWISE ? -degrees : degrees))
-            * turnExactness);
+    return Math.abs(Robot.drivetrain.getGyroo()) >= (desiredDegrees * turnExactness);
   }
 
   @Override
