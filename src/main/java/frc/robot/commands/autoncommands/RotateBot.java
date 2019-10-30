@@ -37,7 +37,14 @@ public class RotateBot extends Command {
 
   @Override
   protected void initialize() {
-    desiredDegrees = Robot.drivetrain.getGyroo() + (direction == Rotate.CLOCKWISE ? degrees : -degrees);
+    switch (direction) {
+    case CLOCKWISE:
+      desiredDegrees = Robot.drivetrain.getGyroo() + degrees;
+      break;
+    case COUNTER_CLOCKWISE:
+      desiredDegrees = Robot.drivetrain.getGyroo() - degrees;
+      break;
+    }
   }
 
   @Override
@@ -48,7 +55,7 @@ public class RotateBot extends Command {
     error = desiredDegrees - Robot.drivetrain.getGyroo();
     derivative = (previousError - error) / Robot.kDefaultPeriod;
     turnSpeed = error * kP + derivative * kD;
-    Robot.drivetrain.auton(0.0, 0.0, (direction == Rotate.CLOCKWISE ? turnSpeed : turnSpeed));
+    Robot.drivetrain.auton(0.0, 0.0, turnSpeed);
     previousError = error;
   }
 
