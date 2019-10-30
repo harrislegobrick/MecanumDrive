@@ -17,9 +17,9 @@ public class RotateBot extends Command {
 
   private Rotate direction;
   private double degrees, desiredDegrees, previousError;
-  private double turnExactness = 1.0;
-  private double kP = 0.01;
-  private double kD = 0.005;
+  private double turnExactness = 0.85;
+  private double kP = 0.004;
+  private double kD = 0.001;
 
   /**
    * Used to rotate the bot a certain degrees.
@@ -48,7 +48,7 @@ public class RotateBot extends Command {
     error = desiredDegrees - Robot.drivetrain.getGyroo();
     derivative = (previousError - error) / Robot.kDefaultPeriod;
     turnSpeed = error * kP + derivative * kD;
-    Robot.drivetrain.auton(0.0, 0.0, (direction == Rotate.CLOCKWISE ? turnSpeed : -turnSpeed));
+    Robot.drivetrain.auton(0.0, 0.0, (direction == Rotate.CLOCKWISE ? turnSpeed : turnSpeed));
     previousError = error;
   }
 
