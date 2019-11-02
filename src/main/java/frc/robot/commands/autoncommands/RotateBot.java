@@ -62,16 +62,7 @@ public class RotateBot extends Command {
 
   @Override
   protected boolean isFinished() {
-    boolean fin = false;
-    switch (direction) {
-    case CLOCKWISE:
-      fin = Robot.drivetrain.getGyroo() >= (desiredDegrees * turnExactness);
-      break;
-    case COUNTER_CLOCKWISE:
-      fin = Robot.drivetrain.getGyroo() <= (desiredDegrees * turnExactness);
-      break;
-    }
-    return fin;
+    return Math.abs(initalHeading - Robot.drivetrain.getGyroo()) >= (degrees * turnExactness);
   }
 
   @Override
