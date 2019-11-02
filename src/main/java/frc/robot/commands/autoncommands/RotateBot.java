@@ -52,8 +52,7 @@ public class RotateBot extends Command {
 
   @Override
   protected void execute() {
-    double error, derivative;
-    double turnSpeed = 0;
+    double error, derivative, turnSpeed;
 
     error = desiredDegrees - Robot.drivetrain.getGyroo();
     derivative = (previousError - error) / Robot.kDefaultPeriod;
