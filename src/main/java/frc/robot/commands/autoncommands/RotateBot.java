@@ -20,6 +20,9 @@ public class RotateBot extends Command {
   private double turnExactness = 0.85;
   private double kP = 0.004;
   private double kD = 0.001;
+  private final double turnExactness = 1.0;
+  private final double kP = 0.004;
+  private final double kD = 0.001;
 
   /**
    * Used to rotate the bot a certain degrees.
