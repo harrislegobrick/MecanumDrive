@@ -16,10 +16,7 @@ public class RotateBot extends Command {
   }
 
   private Rotate direction;
-  private double degrees, desiredDegrees, previousError;
-  private double turnExactness = 0.85;
-  private double kP = 0.004;
-  private double kD = 0.001;
+  private double degrees, desiredDegrees, previousError, initalHeading;
   private final double turnExactness = 1.0;
   private final double kP = 0.004;
   private final double kD = 0.001;
@@ -48,6 +45,8 @@ public class RotateBot extends Command {
       desiredDegrees = Robot.drivetrain.getGyroo() - degrees;
       break;
     }
+
+    initalHeading = Robot.drivetrain.getGyroo();
   }
 
   @Override
