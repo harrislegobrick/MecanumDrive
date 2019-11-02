@@ -31,7 +31,7 @@ public class RotateBot extends Command {
    */
   public RotateBot(double degrees, Rotate direction) {
     requires(Robot.drivetrain);
-    this.degrees = degrees;
+    this.degrees = Math.abs(degrees);
     this.direction = direction;
   }
 
