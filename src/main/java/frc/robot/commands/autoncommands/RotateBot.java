@@ -17,6 +17,7 @@ public class RotateBot extends Command {
 
   private Rotate direction;
   private double degrees, desiredDegrees, previousError, initalHeading;
+  private final double maxSpeed = 0.4;
   private final double turnExactness = 1.0;
   private final double kP = 0.004;
   private final double kD = 0.001;
