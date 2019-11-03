@@ -21,12 +21,11 @@ public class DriveStraight extends TimedCommand {
 
   /**
    * Used to drive the robot for a time at a speed in a direction.
-   * <ul>
-   * <li><b>time</b> : How long it should run in seconds.</li>
-   * <li><b>driveSpeed</b> : The speed at which it should run (0 to 1).</li>
-   * <li><b>direction</b> : The direction it should drive (forward, backward,
-   * left, and right).</li>
-   * </ul>
+   * 
+   * @param time       : How long it should run in seconds.
+   * @param driveSpeed : The speed at which it should run (0 to 1).
+   * @param direction  : The direction it should drive (forward, backward, left,
+   *                   and right).
    */
   public DriveStraight(double time, double driveSpeed, Drive direction) {
     super(time);

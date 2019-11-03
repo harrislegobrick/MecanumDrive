@@ -22,11 +22,9 @@ public class Rotate2 extends Command {
 
   /**
    * Used to rotate the bot a certain degrees.
-   * <ul>
-   * <li><b>degrees</b> : The degrees the robot should turn to.</li>
-   * <li><b>direction</b> : Whether it should rotate clockwise or counter
-   * clockwise.</li>
-   * </ul>
+   * 
+   * @param degrees   : The degrees the robot should turn to.
+   * @param direction : Whether it should rotate clockwise or counter clockwise.
    */
   public Rotate2(double degrees, Direction direction) {
     requires(Robot.drivetrain);
