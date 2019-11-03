@@ -17,6 +17,13 @@ public class MecanumDriveWithStick extends Command {
 
   private Orientation orientation;
 
+  /**
+   * Used to drive the robot in a mecanum style with one stick.
+   * 
+   * @param orientation : Either robot or field orientated. If field orientated
+   *                    the heading does not matter; forward will be whichever way
+   *                    the front was facing when changed to field.
+   */
   public MecanumDriveWithStick(Orientation orientation) {
     requires(Robot.drivetrain);
     this.orientation = orientation;
