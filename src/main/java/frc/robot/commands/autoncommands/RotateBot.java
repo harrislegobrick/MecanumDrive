@@ -37,18 +37,7 @@ public class RotateBot extends Command {
 
   @Override
   protected void initialize() {
-    // desiredDegrees = Robot.drivetrain.getGyroo() + (direction == Rotate.CLOCKWISE
-    // ? degrees : -degrees);
-    // ^ equal to v?
-    switch (direction) {
-    case CLOCKWISE:
-      desiredDegrees = Robot.drivetrain.getGyroo() + degrees;
-      break;
-    case COUNTER_CLOCKWISE:
-      desiredDegrees = Robot.drivetrain.getGyroo() - degrees;
-      break;
-    }
-
+    desiredDegrees = Robot.drivetrain.getGyroo() + (direction == Rotate.CLOCKWISE ? degrees : -degrees);
     initalHeading = Robot.drivetrain.getGyroo();
   }
 
