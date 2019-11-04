@@ -19,8 +19,9 @@ public class RotateBot extends Command {
   private double degrees, desiredDegrees, previousError, initalHeading;
   private final double maxSpeed = 0.6;
   private final double turnExactness = 1.0;
-  private final double kP = 0.004; // will need tuning
-  private final double kD = 0.001; // will need tuning
+  private final double kP = 0.0; // will need tuning (really small number now bc of kF)
+  private final double kD = 0.0; // will need tuning (really small number now bc of kF)
+  private final double kF = 0.003;
 
   /**
    * Used to rotate the bot a certain degrees.
