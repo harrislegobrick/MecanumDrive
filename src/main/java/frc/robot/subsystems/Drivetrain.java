@@ -19,15 +19,15 @@ import frc.robot.commands.MecanumDriveWithStick.Orientation;
  * Add your docs here.
  */
 public class Drivetrain extends Subsystem {
-  private static PWMVictorSPX frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
+  private static WPI_VictorSPX frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
   private static MecanumDrive rodot;
   private static ADXRS450_Gyro gyro;
 
   public Drivetrain() {
-    frontLeftMotor = new PWMVictorSPX(RobotMap.FRONT_LEFT_MOTOR);
-    frontRightMotor = new PWMVictorSPX(RobotMap.FRONT_RIGHT_MOTOR);
-    backLeftMotor = new PWMVictorSPX(RobotMap.BACK_LEFT_MOTOR);
-    backRightMotor = new PWMVictorSPX(RobotMap.BACK_RIGHT_MOTOR);
+    frontLeftMotor = new WPI_VictorSPX(RobotMap.FRONT_LEFT_MOTOR);
+    frontRightMotor = new WPI_VictorSPX(RobotMap.FRONT_RIGHT_MOTOR);
+    backLeftMotor = new WPI_VictorSPX(RobotMap.BACK_LEFT_MOTOR);
+    backRightMotor = new WPI_VictorSPX(RobotMap.BACK_RIGHT_MOTOR);
 
     rodot = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
 
