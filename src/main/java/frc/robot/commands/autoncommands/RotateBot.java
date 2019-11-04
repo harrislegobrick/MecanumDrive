@@ -21,7 +21,7 @@ public class RotateBot extends Command {
   private final double turnExactness = 1.0;
   private final double kP = 0.0; // will need tuning (really small number now bc of kF)
   private final double kD = 0.0; // will need tuning (really small number now bc of kF)
-  private final double kF = 0.003;
+  private final double kF = 0.002;
 
   /**
    * Used to rotate the bot a certain degrees.
