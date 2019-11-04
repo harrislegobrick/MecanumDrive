@@ -45,7 +45,7 @@ public class RotateBot extends Command {
     double error, derivative, turnSpeed;
 
     error = desiredDegrees - Robot.drivetrain.getGyroo();
-    derivative = (previousError - error) / Robot.kDefaultPeriod;
+    derivative = (error - previousError) / Robot.kDefaultPeriod;
     turnSpeed = error * kP + derivative * kD;
     Robot.drivetrain.auton(0.0, 0.0,
         Math.abs(turnSpeed) >= maxSpeed ? maxSpeed * (turnSpeed / Math.abs(turnSpeed)) : turnSpeed);
