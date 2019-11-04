@@ -7,8 +7,10 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.RobotMap;
@@ -51,6 +53,20 @@ public class Drivetrain extends Subsystem {
 
   public void stop() {
     rodot.stopMotor();
+  }
+
+  public void setBrake() {
+    frontLeftMotor.setNeutralMode(NeutralMode.Brake);
+    frontRightMotor.setNeutralMode(NeutralMode.Brake);
+    backLeftMotor.setNeutralMode(NeutralMode.Brake);
+    backRightMotor.setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void setCoast() {
+    frontLeftMotor.setNeutralMode(NeutralMode.Coast);
+    frontRightMotor.setNeutralMode(NeutralMode.Coast);
+    backLeftMotor.setNeutralMode(NeutralMode.Coast);
+    backRightMotor.setNeutralMode(NeutralMode.Coast);
   }
 
   public double getGyroo() {

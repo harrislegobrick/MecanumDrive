@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
     limelight = new Limelight();
 
     OI.init();
-    
+
     chooser.setDefaultOption("Default Auto", new SimpleAuton());
     chooser.addOption("Test Auto", new SimpleAuton());
     chooser.addOption("Cha Cha Slide", new ChaChaSlide());
@@ -73,6 +73,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    drivetrain.setCoast();
   }
 
   @Override
@@ -94,14 +95,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    drivetrain.setBrake();
     autonomousCommand = chooser.getSelected();
-
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-     * switch(autoSelected) { case "My Auto": autonomousCommand = new
-     * MyAutoCommand(); break; case "Default Auto": default: autonomousCommand = new
-     * ExampleCommand(); break; }
-     */
 
     // schedule the autonomous command (example)
     if (autonomousCommand != null) {
@@ -126,6 +121,7 @@ public class Robot extends TimedRobot {
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
     }
+    drivetrain.setBrake();
   }
 
   /**
