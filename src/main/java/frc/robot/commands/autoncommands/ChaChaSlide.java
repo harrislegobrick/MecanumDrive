@@ -17,11 +17,11 @@ public class ChaChaSlide extends CommandGroup {
    * Isn't this the only reason to have a holonomic drivetrain?
    */
   public ChaChaSlide() {
-    addSequential(new DriveStraight(1, 0.8, Drive.RIGHT));
+    addSequential(new DriveStraight(1, 0.4, Drive.RIGHT));
     addSequential(new WaitCommand(2));
-    addSequential(new DriveStraight(1, 0.8, Drive.LEFT));
+    addSequential(new DriveStraight(1, 0.4, Drive.LEFT));
     addSequential(new WaitCommand(2));
-    addSequential(new DriveStraight(1, 0.8, Drive.BACKWARD));
+    addSequential(new DriveStraight(0.5, 0.4, Drive.BACKWARD));
     addSequential(new WaitCommand(3));
     addSequential(new RotateBot(90, Rotate.COUNTER_CLOCKWISE));
     addSequential(new WaitCommand(1));
