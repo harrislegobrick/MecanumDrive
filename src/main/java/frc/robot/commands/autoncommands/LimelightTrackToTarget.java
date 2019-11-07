@@ -11,47 +11,46 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class LimelightTrackToTarget extends Command {
-  private double angle, zRotation; // Robot.limelight.getArea() * 0.2; gotta figure out what the area would be
+  private double previousError;
   private final double kP = 0.03;
+  private final double kD = 0.005;
 
   public LimelightTrackToTarget() {
     requires(Robot.limelight);
     requires(Robot.drivetrain);
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     Robot.limelight.setTracking();
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    double error, derivative, zRotation;
     double magnitude = 0.2;
-    angle = Robot.limelight.getX();
-    zRotation = angle * kP;
-    magnitude -= Math.pow((0.07 * Math.pow(Math.abs(angle), 0.7)), 2);
+
+    error = Robot.limelight.getX();
+    derivative = (error - previousError) / Robot.kDefaultPeriod;
+    zRotation = error * kP + derivative * kD;
+    magnitude -= Math.pow((0.07 * Math.pow(Math.abs(error), 0.7)), 2);
 
     if (Robot.limelight.getAvalible())
-      Robot.drivetrain.auton(magnitude, angle, zRotation);
+      Robot.drivetrain.auton(magnitude, error, zRotation);
+    previousError = error;
   }
 
-  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return false;
   }
 
-  // Called once after isFinished returns true
   @Override
   protected void end() {
     Robot.drivetrain.stop();
     Robot.limelight.setDriving();
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
   @Override
   protected void interrupted() {
     end();
