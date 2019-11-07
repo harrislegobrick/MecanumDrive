@@ -7,8 +7,10 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.RobotMap;
@@ -19,15 +21,15 @@ import frc.robot.commands.MecanumDriveWithStick.Orientation;
  * Add your docs here.
  */
 public class Drivetrain extends Subsystem {
-  private static PWMVictorSPX frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
+  private static WPI_VictorSPX frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
   private static MecanumDrive rodot;
   private static ADXRS450_Gyro gyro;
 
   public Drivetrain() {
-    frontLeftMotor = new PWMVictorSPX(RobotMap.FRONT_LEFT_MOTOR);
-    frontRightMotor = new PWMVictorSPX(RobotMap.FRONT_RIGHT_MOTOR);
-    backLeftMotor = new PWMVictorSPX(RobotMap.BACK_LEFT_MOTOR);
-    backRightMotor = new PWMVictorSPX(RobotMap.BACK_RIGHT_MOTOR);
+    frontLeftMotor = new WPI_VictorSPX(RobotMap.FRONT_LEFT_MOTOR);
+    frontRightMotor = new WPI_VictorSPX(RobotMap.FRONT_RIGHT_MOTOR);
+    backLeftMotor = new WPI_VictorSPX(RobotMap.BACK_LEFT_MOTOR);
+    backRightMotor = new WPI_VictorSPX(RobotMap.BACK_RIGHT_MOTOR);
 
     rodot = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
 
@@ -51,6 +53,20 @@ public class Drivetrain extends Subsystem {
 
   public void stop() {
     rodot.stopMotor();
+  }
+
+  public void setBrake() {
+    frontLeftMotor.setNeutralMode(NeutralMode.Brake);
+    frontRightMotor.setNeutralMode(NeutralMode.Brake);
+    backLeftMotor.setNeutralMode(NeutralMode.Brake);
+    backRightMotor.setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void setCoast() {
+    frontLeftMotor.setNeutralMode(NeutralMode.Coast);
+    frontRightMotor.setNeutralMode(NeutralMode.Coast);
+    backLeftMotor.setNeutralMode(NeutralMode.Coast);
+    backRightMotor.setNeutralMode(NeutralMode.Coast);
   }
 
   public double getGyroo() {
