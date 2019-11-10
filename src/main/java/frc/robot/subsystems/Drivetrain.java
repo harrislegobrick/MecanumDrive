@@ -33,9 +33,11 @@ public class Drivetrain extends Subsystem {
 
     rodot = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
 
-    rodot.setDeadband(RobotMap.JOY_DEADZONE);
-
     gyro = new ADXRS450_Gyro();
+  }
+
+  public void init() {
+    rodot.setDeadband(RobotMap.JOY_DEADZONE);
     gyro.calibrate();
   }
 

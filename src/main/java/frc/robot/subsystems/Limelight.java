@@ -14,8 +14,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Limelight getters and setters
  */
 public class Limelight extends Subsystem {
-  public Limelight() {
+  public void init() {
     setDriving();
+    // The 2nd cam stream is placed in the lower-right corner of the 1st cam stream
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(1);
   }
 
   public double getX() {
@@ -26,6 +28,14 @@ public class Limelight extends Subsystem {
     return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
   }
 
+  public double getArea() {
+    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
+  }
+
+  public boolean getAvalible() {
+    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0) == 1;
+  }
+
   public void setTracking() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0);
@@ -34,14 +44,6 @@ public class Limelight extends Subsystem {
   public void setDriving() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
-  }
-
-  public double getArea() {
-    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
-  }
-
-  public boolean getAvalible() {
-    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0) == 1;
   }
 
   @Override
