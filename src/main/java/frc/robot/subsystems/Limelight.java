@@ -14,6 +14,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Limelight getters and setters
  */
 public class Limelight extends Subsystem {
+  public Limelight() {
+    init();
+  }
+
   public void init() {
     setDriving();
     // The 2nd cam stream is placed in the lower-right corner of the 1st cam stream

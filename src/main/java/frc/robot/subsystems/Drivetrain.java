@@ -34,6 +34,7 @@ public class Drivetrain extends Subsystem {
     rodot = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
 
     gyro = new ADXRS450_Gyro();
+    init();
   }
 
   public void init() {
