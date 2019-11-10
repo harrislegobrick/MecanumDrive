@@ -43,6 +43,8 @@ public class Robot extends TimedRobot {
     limelight = new Limelight();
 
     OI.init();
+    limelight.init();
+    drivetrain.init();
 
     chooser.setDefaultOption("Default Auto", new SimpleAuton());
     chooser.addOption("Test Auto", new SimpleAuton());
