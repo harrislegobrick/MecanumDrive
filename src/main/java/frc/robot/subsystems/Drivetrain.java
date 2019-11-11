@@ -42,6 +42,7 @@ public class Drivetrain extends Subsystem {
 
     rodot.setDeadband(RobotMap.JOY_DEADZONE);
     gyro.calibrate();
+    // maybe add default command here?
   }
 
   public static Drivetrain getInstance() {
