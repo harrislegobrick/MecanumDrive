@@ -20,7 +20,7 @@ public class Limelight extends Subsystem {
     init();
   }
 
-  public void init() {
+  private void init() {
     setDriving();
     // The 2nd cam stream is placed in the lower-right corner of the 1st cam stream
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(1);
