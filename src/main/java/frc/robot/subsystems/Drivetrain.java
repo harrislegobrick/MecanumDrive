@@ -30,7 +30,7 @@ public class Drivetrain extends Subsystem {
     init();
   }
 
-  private static void init() {
+  private void init() {
     frontLeftMotor = new WPI_VictorSPX(RobotMap.FRONT_LEFT_MOTOR);
     frontRightMotor = new WPI_VictorSPX(RobotMap.FRONT_RIGHT_MOTOR);
     backLeftMotor = new WPI_VictorSPX(RobotMap.BACK_LEFT_MOTOR);
