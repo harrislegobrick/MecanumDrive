@@ -14,7 +14,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Limelight getters and setters
  */
 public class Limelight extends Subsystem {
-  public Limelight() {
+  private static Limelight instance;
+
+  private Limelight() {
     init();
   }
 
@@ -24,28 +26,34 @@ public class Limelight extends Subsystem {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(1);
   }
 
-  public double getX() {
+  public static Limelight getInstance() {
+    if (instance == null)
+      instance = new Limelight();
+    return instance;
+  }
+
+  public static double getX() {
     return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
   }
 
-  public double getY() {
+  public static double getY() {
     return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
   }
 
-  public double getArea() {
+  public static double getArea() {
     return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
   }
 
-  public boolean getAvalible() {
+  public static boolean getAvalible() {
     return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0) == 1;
   }
 
-  public void setTracking() {
+  public static void setTracking() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0);
   }
 
-  public void setDriving() {
+  public static void setDriving() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
   }

@@ -9,6 +9,8 @@ package frc.robot.commands.autoncommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Limelight;
 
 public class LimelightTrackToTarget extends Command {
   private double previousError;
@@ -16,13 +18,13 @@ public class LimelightTrackToTarget extends Command {
   private final double kD = 0.005;
 
   public LimelightTrackToTarget() {
-    requires(Robot.limelight);
-    requires(Robot.drivetrain);
+    requires(Limelight.getInstance());
+    requires(Drivetrain.getInstance());
   }
 
   @Override
   protected void initialize() {
-    Robot.limelight.setTracking();
+    Limelight.setTracking();
   }
 
   @Override
@@ -30,13 +32,13 @@ public class LimelightTrackToTarget extends Command {
     double error, derivative, zRotation;
     double magnitude = 0.2;
 
-    error = Robot.limelight.getX();
+    error = Limelight.getX();
     derivative = (error - previousError) / Robot.kDefaultPeriod;
     zRotation = error * kP + derivative * kD;
     magnitude -= Math.pow((0.07 * Math.pow(Math.abs(error), 0.7)), 2);
 
-    if (Robot.limelight.getAvalible())
-      Robot.drivetrain.auton(magnitude, error, zRotation);
+    if (Limelight.getAvalible())
+      Drivetrain.auton(magnitude, error, zRotation);
     previousError = error;
   }
 
@@ -47,8 +49,8 @@ public class LimelightTrackToTarget extends Command {
 
   @Override
   protected void end() {
-    Robot.drivetrain.stop();
-    Robot.limelight.setDriving();
+    Drivetrain.stop();
+    Limelight.setDriving();
   }
 
   @Override

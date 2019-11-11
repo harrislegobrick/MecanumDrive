@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.Drivetrain;
 
 public class MecanumDriveWithStick extends Command {
   public enum Orientation {
@@ -25,14 +26,14 @@ public class MecanumDriveWithStick extends Command {
    *                    the front was facing when changed to field.
    */
   public MecanumDriveWithStick(Orientation orientation) {
-    requires(Robot.drivetrain);
+    requires(Drivetrain.getInstance());
     this.orientation = orientation;
   }
 
   @Override
   protected void initialize() {
     if (orientation == Orientation.FIELD)
-      Robot.drivetrain.resetGyro();
+      Drivetrain.resetGyro();
   }
 
   @Override
@@ -43,10 +44,10 @@ public class MecanumDriveWithStick extends Command {
     double z = Robot.oi.getJoyZ() * throttle * 0.7;
     switch (orientation) {
     case ROBOT:
-      Robot.drivetrain.stickRobot(x, y, z);
+      Drivetrain.stickRobot(x, y, z);
       break;
     case FIELD:
-      Robot.drivetrain.stickField(x, y, z);
+      Drivetrain.stickField(x, y, z);
       break;
     }
   }
@@ -58,7 +59,7 @@ public class MecanumDriveWithStick extends Command {
 
   @Override
   protected void end() {
-    Robot.drivetrain.stop();
+    Drivetrain.stop();
   }
 
   @Override

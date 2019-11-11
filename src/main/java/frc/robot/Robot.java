@@ -26,8 +26,6 @@ import frc.robot.subsystems.Limelight;
  */
 public class Robot extends TimedRobot {
   public static OI oi;
-  public static Drivetrain drivetrain;
-  public static Limelight limelight;
 
   Command autonomousCommand;
   SendableChooser<Command> chooser = new SendableChooser<>();
@@ -39,8 +37,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
-    drivetrain = new Drivetrain();
-    limelight = new Limelight();
 
     OI.init();
 
@@ -61,9 +57,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putNumber("gyro", Robot.drivetrain.getGyroo());
-    SmartDashboard.putNumber("limelight x", Robot.limelight.getX());
-    SmartDashboard.putNumber("limelight area", Robot.limelight.getArea());
+    SmartDashboard.putNumber("gyro", Drivetrain.getGyroo());
+    SmartDashboard.putNumber("limelight x", Limelight.getX());
+    SmartDashboard.putNumber("limelight area", Limelight.getArea());
   }
 
   /**
@@ -73,7 +69,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    drivetrain.setCoast();
+    Drivetrain.setCoast();
   }
 
   @Override
@@ -95,7 +91,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    drivetrain.setBrake();
+    Drivetrain.setBrake();
     autonomousCommand = chooser.getSelected();
 
     // schedule the autonomous command (example)
@@ -121,7 +117,7 @@ public class Robot extends TimedRobot {
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
     }
-    drivetrain.setBrake();
+    Drivetrain.setBrake();
   }
 
   /**

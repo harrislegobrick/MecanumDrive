@@ -9,6 +9,7 @@ package frc.robot.commands.autoncommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.Drivetrain;
 
 public class RotateBot extends Command {
   public enum Rotate {
@@ -30,37 +31,37 @@ public class RotateBot extends Command {
    * @param direction : Whether it should rotate clockwise or counter clockwise.
    */
   public RotateBot(double degrees, Rotate direction) {
-    requires(Robot.drivetrain);
+    requires(Drivetrain.getInstance());
     this.degrees = Math.abs(degrees);
     this.direction = direction;
   }
 
   @Override
   protected void initialize() {
-    desiredDegrees = Robot.drivetrain.getGyroo() + (direction == Rotate.CLOCKWISE ? degrees : -degrees);
-    initalHeading = Robot.drivetrain.getGyroo();
+    desiredDegrees = Drivetrain.getGyroo() + (direction == Rotate.CLOCKWISE ? degrees : -degrees);
+    initalHeading = Drivetrain.getGyroo();
   }
 
   @Override
   protected void execute() {
     double error, derivative, turnSpeed;
 
-    error = desiredDegrees - Robot.drivetrain.getGyroo();
+    error = desiredDegrees - Drivetrain.getGyroo();
     derivative = (error - previousError) / Robot.kDefaultPeriod;
     turnSpeed = error * kP + derivative * kD + (direction == Rotate.CLOCKWISE ? degrees : -degrees) * kF;
-    Robot.drivetrain.auton(0.0, 0.0,
+    Drivetrain.auton(0.0, 0.0,
         Math.abs(turnSpeed) >= maxSpeed ? maxSpeed * (turnSpeed / Math.abs(turnSpeed)) : turnSpeed);
     previousError = error;
   }
 
   @Override
   protected boolean isFinished() {
-    return Math.abs(initalHeading - Robot.drivetrain.getGyroo()) >= (degrees * turnExactness);
+    return Math.abs(initalHeading - Drivetrain.getGyroo()) >= (degrees * turnExactness);
   }
 
   @Override
   protected void end() {
-    Robot.drivetrain.stop();
+    Drivetrain.stop();
   }
 
   @Override
