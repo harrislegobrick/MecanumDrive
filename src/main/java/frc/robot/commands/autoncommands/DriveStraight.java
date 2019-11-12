@@ -12,11 +12,17 @@ import frc.robot.Robot;
 
 public class DriveStraight extends TimedCommand {
   public enum Drive {
-    FORWARD, BACKWARD, LEFT, RIGHT
+    FORWARD(0), BACKWARD(180), LEFT(-90), RIGHT(90);
+
+    public final int toInt;
+
+    private Drive(int toInt) {
+      this.toInt = toInt;
+    }
   }
 
   private Drive direction;
-  private double driveSpeed, error, initalHeading, driveDirection;
+  private double driveSpeed, error, initalHeading;
   private double kP = 0.05;
 
   /**
@@ -37,26 +43,12 @@ public class DriveStraight extends TimedCommand {
   @Override
   protected void initialize() {
     initalHeading = Robot.drivetrain.getGyroo();
-    switch (direction) {
-    case FORWARD:
-      driveDirection = 0;
-      break;
-    case BACKWARD:
-      driveDirection = 180;
-      break;
-    case LEFT:
-      driveDirection = -90;
-      break;
-    case RIGHT:
-      driveDirection = 90;
-      break;
-    }
   }
 
   @Override
   protected void execute() {
     error = initalHeading - Robot.drivetrain.getGyroo();
-    Robot.drivetrain.auton(driveSpeed, driveDirection, error * kP);
+    Robot.drivetrain.auton(driveSpeed, direction.toInt, error * kP);
   }
 
   @Override
