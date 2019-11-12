@@ -24,7 +24,7 @@ public class LimelightTrackToTarget extends Command {
 
   @Override
   protected void initialize() {
-    Limelight.setTracking();
+    Limelight.getInstance().setTracking();
   }
 
   @Override
@@ -32,13 +32,13 @@ public class LimelightTrackToTarget extends Command {
     double error, derivative, zRotation;
     double magnitude = 0.2;
 
-    error = Limelight.getX();
+    error = Limelight.getInstance().getX();
     derivative = (error - previousError) / Robot.kDefaultPeriod;
     zRotation = error * kP + derivative * kD;
     magnitude -= Math.pow((0.07 * Math.pow(Math.abs(error), 0.7)), 2);
 
-    if (Limelight.getAvalible())
-      Drivetrain.auton(magnitude, error, zRotation);
+    if (Limelight.getInstance().getAvalible())
+      Drivetrain.getInstance().auton(magnitude, error, zRotation);
     previousError = error;
   }
 
@@ -49,8 +49,8 @@ public class LimelightTrackToTarget extends Command {
 
   @Override
   protected void end() {
-    Drivetrain.stop();
-    Limelight.setDriving();
+    Drivetrain.getInstance().stop();
+    Limelight.getInstance().setDriving();
   }
 
   @Override

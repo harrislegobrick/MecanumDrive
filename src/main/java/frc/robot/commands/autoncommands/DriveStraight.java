@@ -36,7 +36,7 @@ public class DriveStraight extends TimedCommand {
 
   @Override
   protected void initialize() {
-    initalHeading = Drivetrain.getGyroo();
+    initalHeading = Drivetrain.getInstance().getGyroo();
     switch (direction) {
     case FORWARD:
       driveDirection = 0;
@@ -55,13 +55,13 @@ public class DriveStraight extends TimedCommand {
 
   @Override
   protected void execute() {
-    error = initalHeading - Drivetrain.getGyroo();
-    Drivetrain.auton(driveSpeed, driveDirection, error * kP);
+    error = initalHeading - Drivetrain.getInstance().getGyroo();
+    Drivetrain.getInstance().auton(driveSpeed, driveDirection, error * kP);
   }
 
   @Override
   protected void end() {
-    Drivetrain.stop();
+    Drivetrain.getInstance().stop();
   }
 
   @Override

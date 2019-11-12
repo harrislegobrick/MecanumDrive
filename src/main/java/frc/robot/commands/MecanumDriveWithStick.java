@@ -33,7 +33,7 @@ public class MecanumDriveWithStick extends Command {
   @Override
   protected void initialize() {
     if (orientation == Orientation.FIELD)
-      Drivetrain.resetGyro();
+      Drivetrain.getInstance().resetGyro();
   }
 
   @Override
@@ -44,10 +44,10 @@ public class MecanumDriveWithStick extends Command {
     double z = Robot.oi.getJoyZ() * throttle * 0.7;
     switch (orientation) {
     case ROBOT:
-      Drivetrain.stickRobot(x, y, z);
+      Drivetrain.getInstance().stickRobot(x, y, z);
       break;
     case FIELD:
-      Drivetrain.stickField(x, y, z);
+      Drivetrain.getInstance().stickField(x, y, z);
       break;
     }
   }
@@ -59,7 +59,7 @@ public class MecanumDriveWithStick extends Command {
 
   @Override
   protected void end() {
-    Drivetrain.stop();
+    Drivetrain.getInstance().stop();
   }
 
   @Override

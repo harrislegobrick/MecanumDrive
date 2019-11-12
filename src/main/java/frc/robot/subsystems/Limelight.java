@@ -20,7 +20,7 @@ public class Limelight extends Subsystem {
     init();
   }
 
-  private void init() {
+  public void init() {
     setDriving();
     // The 2nd cam stream is placed in the lower-right corner of the 1st cam stream
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(1);
@@ -32,28 +32,28 @@ public class Limelight extends Subsystem {
     return instance;
   }
 
-  public static double getX() {
+  public double getX() {
     return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
   }
 
-  public static double getY() {
+  public double getY() {
     return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
   }
 
-  public static double getArea() {
+  public double getArea() {
     return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
   }
 
-  public static boolean getAvalible() {
+  public boolean getAvalible() {
     return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0) == 1;
   }
 
-  public static void setTracking() {
+  public void setTracking() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0);
   }
 
-  public static void setDriving() {
+  public void setDriving() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
   }

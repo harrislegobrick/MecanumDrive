@@ -30,7 +30,7 @@ public class Drivetrain extends Subsystem {
     init();
   }
 
-  private void init() {
+  public void init() {
     frontLeftMotor = new WPI_VictorSPX(RobotMap.FRONT_LEFT_MOTOR);
     frontRightMotor = new WPI_VictorSPX(RobotMap.FRONT_RIGHT_MOTOR);
     backLeftMotor = new WPI_VictorSPX(RobotMap.BACK_LEFT_MOTOR);
@@ -50,41 +50,41 @@ public class Drivetrain extends Subsystem {
     return instance;
   }
 
-  public static void stickRobot(double ySpeed, double xSpeed, double zRotation) {
+  public void stickRobot(double ySpeed, double xSpeed, double zRotation) {
     rodot.driveCartesian(ySpeed, xSpeed, zRotation);
   }
 
-  public static void stickField(double ySpeed, double xSpeed, double zRotation) {
+  public void stickField(double ySpeed, double xSpeed, double zRotation) {
     rodot.driveCartesian(ySpeed, xSpeed, zRotation, -gyro.getAngle());
   }
 
-  public static void auton(double magnitude, double angle, double zRotation) {
+  public void auton(double magnitude, double angle, double zRotation) {
     rodot.drivePolar(magnitude, angle, zRotation);
   }
 
-  public static void stop() {
+  public void stop() {
     rodot.stopMotor();
   }
 
-  public static void setBrake() {
+  public void setBrake() {
     frontLeftMotor.setNeutralMode(NeutralMode.Brake);
     frontRightMotor.setNeutralMode(NeutralMode.Brake);
     backLeftMotor.setNeutralMode(NeutralMode.Brake);
     backRightMotor.setNeutralMode(NeutralMode.Brake);
   }
 
-  public static void setCoast() {
+  public void setCoast() {
     frontLeftMotor.setNeutralMode(NeutralMode.Coast);
     frontRightMotor.setNeutralMode(NeutralMode.Coast);
     backLeftMotor.setNeutralMode(NeutralMode.Coast);
     backRightMotor.setNeutralMode(NeutralMode.Coast);
   }
 
-  public static double getGyroo() {
+  public double getGyroo() {
     return gyro.getAngle();
   }
 
-  public static void resetGyro() {
+  public void resetGyro() {
     gyro.reset();
   }
 
