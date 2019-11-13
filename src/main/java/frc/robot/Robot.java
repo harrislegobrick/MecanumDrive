@@ -62,6 +62,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("gyro", Drivetrain.getInstance().getGyroo());
     SmartDashboard.putNumber("limelight x", Limelight.getInstance().getX());
     SmartDashboard.putNumber("limelight area", Limelight.getInstance().getArea());
+    SmartDashboard.putBoolean("Drivetrain Initalized", Drivetrain.getInstance().inted());
+    SmartDashboard.putBoolean("Limelight Initalized", Limelight.getInstance().inted());
   }
 
   /**

@@ -25,6 +25,7 @@ public class Drivetrain extends Subsystem {
   private static WPI_VictorSPX frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
   private static MecanumDrive rodot;
   private static ADXRS450_Gyro gyro;
+  private static boolean inted = false;
 
   private Drivetrain() {
     init();
@@ -42,12 +43,17 @@ public class Drivetrain extends Subsystem {
 
     rodot.setDeadband(RobotMap.JOY_DEADZONE);
     gyro.calibrate();
+    inted = true;
   }
 
   public static Drivetrain getInstance() {
     if (instance == null)
       instance = new Drivetrain();
     return instance;
+  }
+
+  public boolean inted() {
+    return inted;
   }
 
   public void stickRobot(double ySpeed, double xSpeed, double zRotation) {

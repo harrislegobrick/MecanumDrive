@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Limelight extends Subsystem {
   private static Limelight instance;
+  private static boolean inted = false;
 
   private Limelight() {
     init();
@@ -24,12 +25,17 @@ public class Limelight extends Subsystem {
     setDriving();
     // The 2nd cam stream is placed in the lower-right corner of the 1st cam stream
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(1);
+    inted = true;
   }
 
   public static Limelight getInstance() {
     if (instance == null)
       instance = new Limelight();
     return instance;
+  }
+
+  public boolean inted() {
+    return inted;
   }
 
   public double getX() {
