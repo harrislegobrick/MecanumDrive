@@ -11,7 +11,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.RobotMap;
@@ -43,7 +42,6 @@ public class Drivetrain extends Subsystem {
 
     rodot.setDeadband(RobotMap.JOY_DEADZONE);
     gyro.calibrate();
-    System.out.println("Drivetrain Initalization Complete: " + Timer.getFPGATimestamp());
   }
 
   public static Drivetrain getInstance() {
