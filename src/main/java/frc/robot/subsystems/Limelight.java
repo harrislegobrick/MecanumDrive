@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -24,6 +25,7 @@ public class Limelight extends Subsystem {
     setDriving();
     // The 2nd cam stream is placed in the lower-right corner of the 1st cam stream
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(1);
+    System.out.println("Limelight Initalization Complete: " + Timer.getFPGATimestamp());
   }
 
   public static Limelight getInstance() {
