@@ -39,6 +39,8 @@ public class Robot extends TimedRobot {
     oi = new OI();
 
     OI.init();
+    Drivetrain.getInstance().init();
+    Limelight.getInstance().init();
 
     chooser.setDefaultOption("Default Auto", new SimpleAuton());
     chooser.addOption("Test Auto", new SimpleAuton());
@@ -57,9 +59,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putNumber("gyro", Drivetrain.getGyroo());
-    SmartDashboard.putNumber("limelight x", Limelight.getX());
-    SmartDashboard.putNumber("limelight area", Limelight.getArea());
+    SmartDashboard.putNumber("gyro", Drivetrain.getInstance().getGyroo());
+    SmartDashboard.putNumber("limelight x", Limelight.getInstance().getX());
+    SmartDashboard.putNumber("limelight area", Limelight.getInstance().getArea());
+    SmartDashboard.putBoolean("Drivetrain Initalized", Drivetrain.getInstance().inted());
+    SmartDashboard.putBoolean("Limelight Initalized", Limelight.getInstance().inted());
   }
 
   /**
@@ -69,7 +73,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    Drivetrain.setCoast();
+    Drivetrain.getInstance().setCoast();
   }
 
   @Override
@@ -91,7 +95,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    Drivetrain.setBrake();
+    Drivetrain.getInstance().setBrake();
     autonomousCommand = chooser.getSelected();
 
     // schedule the autonomous command (example)
@@ -117,7 +121,7 @@ public class Robot extends TimedRobot {
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
     }
-    Drivetrain.setBrake();
+    Drivetrain.getInstance().setBrake();
   }
 
   /**

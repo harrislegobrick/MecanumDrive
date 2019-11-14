@@ -21,7 +21,7 @@ public class CalibrateLimelight extends Command {
 
   @Override
   protected void initialize() {
-    Limelight.setTracking();
+    Limelight.getInstance().setTracking();
   }
 
   @Override
@@ -35,12 +35,11 @@ public class CalibrateLimelight extends Command {
 
   @Override
   protected void end() {
-    Limelight.setDriving();
+    Limelight.getInstance().setDriving();
   }
 
   @Override
   protected void interrupted() {
     end();
   }
-
 }

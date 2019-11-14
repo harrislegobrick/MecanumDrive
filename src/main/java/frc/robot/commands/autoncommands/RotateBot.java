@@ -38,30 +38,30 @@ public class RotateBot extends Command {
 
   @Override
   protected void initialize() {
-    desiredDegrees = Drivetrain.getGyroo() + (direction == Rotate.CLOCKWISE ? degrees : -degrees);
-    initalHeading = Drivetrain.getGyroo();
+    desiredDegrees = Drivetrain.getInstance().getGyroo() + (direction == Rotate.CLOCKWISE ? degrees : -degrees);
+    initalHeading = Drivetrain.getInstance().getGyroo();
   }
 
   @Override
   protected void execute() {
     double error, derivative, turnSpeed;
 
-    error = desiredDegrees - Drivetrain.getGyroo();
+    error = desiredDegrees - Drivetrain.getInstance().getGyroo();
     derivative = (error - previousError) / Robot.kDefaultPeriod;
     turnSpeed = error * kP + derivative * kD + (direction == Rotate.CLOCKWISE ? degrees : -degrees) * kF;
-    Drivetrain.auton(0.0, 0.0,
+    Drivetrain.getInstance().auton(0.0, 0.0,
         Math.abs(turnSpeed) >= maxSpeed ? maxSpeed * (turnSpeed / Math.abs(turnSpeed)) : turnSpeed);
     previousError = error;
   }
 
   @Override
   protected boolean isFinished() {
-    return Math.abs(initalHeading - Drivetrain.getGyroo()) >= (degrees * turnExactness);
+    return Math.abs(initalHeading - Drivetrain.getInstance().getGyroo()) >= (degrees * turnExactness);
   }
 
   @Override
   protected void end() {
-    Drivetrain.stop();
+    Drivetrain.getInstance().stop();
   }
 
   @Override
