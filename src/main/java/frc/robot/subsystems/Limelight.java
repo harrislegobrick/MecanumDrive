@@ -15,19 +15,21 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Limelight extends Subsystem {
   public Limelight() {
-    init();
-  }
-
-  public void init() {
     setDriving();
     // The 2nd cam stream is placed in the lower-right corner of the 1st cam stream
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(1);
   }
 
+  /**
+   * @return Horizontal Offset From Crosshair To Target (-29.8 to 29.8 degrees)
+   */
   public double getX() {
     return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
   }
 
+  /**
+   * @return Vertical Offset From Crosshair To Target (-24.85 to 24.85 degrees)
+   */
   public double getY() {
     return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
   }
@@ -36,7 +38,7 @@ public class Limelight extends Subsystem {
     return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
   }
 
-  public boolean getAvalible() {
+  public boolean avalible() {
     return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0) == 1;
   }
 

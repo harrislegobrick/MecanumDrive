@@ -5,39 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.autoncommands;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LimelightTrackToTarget extends Command {
-  private double previousError;
-  private final double kP = 0.03;
-  private final double kD = 0.005;
-
-  public LimelightTrackToTarget() {
-    requires(Robot.limelight);
-    requires(Robot.drivetrain);
+public class ConstantLimelightTracker extends Command {
+  public ConstantLimelightTracker() {
+    requires(Robot.limelightTurret);
   }
 
   @Override
   protected void initialize() {
-    Robot.limelight.setTracking();
   }
 
   @Override
   protected void execute() {
-    double error, derivative, zRotation;
-    double magnitude = 0.2;
-
-    error = Robot.limelight.getX();
-    derivative = (error - previousError) / Robot.kDefaultPeriod;
-    zRotation = error * kP + derivative * kD;
-    magnitude -= Math.pow((0.07 * Math.pow(Math.abs(error), 0.7)), 2);
-
-    if (Robot.limelight.avalible())
-      Robot.drivetrain.auton(magnitude, error, zRotation);
-    previousError = error;
+    double goTo;
+    goTo = Robot.limelight.getX() / 59.6 + 0.5 - Robot.limelightTurret.getPos();
+    Robot.limelightTurret.setServo(goTo);
   }
 
   @Override
@@ -47,8 +33,7 @@ public class LimelightTrackToTarget extends Command {
 
   @Override
   protected void end() {
-    Robot.drivetrain.stop();
-    Robot.limelight.setDriving();
+    Robot.limelightTurret.setServo(0.5);
   }
 
   @Override

@@ -16,6 +16,7 @@ import frc.robot.commands.autoncommands.ChaChaSlide;
 import frc.robot.commands.autoncommands.SimpleAuton;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.LimelightTurret;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,6 +29,7 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static Drivetrain drivetrain;
   public static Limelight limelight;
+  public static LimelightTurret limelightTurret;
 
   Command autonomousCommand;
   SendableChooser<Command> chooser = new SendableChooser<>();
@@ -41,6 +43,7 @@ public class Robot extends TimedRobot {
     oi = new OI();
     drivetrain = new Drivetrain();
     limelight = new Limelight();
+    limelightTurret = new LimelightTurret();
 
     OI.init();
 

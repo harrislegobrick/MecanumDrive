@@ -14,11 +14,17 @@ package frc.robot;
  * floating around.
  */
 public class RobotMap {
-  // motors 
-  public static final byte FRONT_LEFT_MOTOR = 0;
-  public static final byte FRONT_RIGHT_MOTOR = 1;
-  public static final byte BACK_LEFT_MOTOR = 2;
-  public static final byte BACK_RIGHT_MOTOR = 3;
+  // motors
+  public class DriveMotors {
+    public static final int FRONT_LEFT = 0;
+    public static final int FRONT_RIGHT = 1;
+    public static final int BACK_LEFT = 2;
+    public static final int BACK_RIGHT = 3;
+  }
+
+  public class OtherMotors {
+    public static final int LIMELIGHT_SERVO = 0;
+  }
 
   // input
   public static final byte JOY_PORT = 0;

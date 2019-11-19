@@ -26,18 +26,15 @@ public class Drivetrain extends Subsystem {
   private static ADXRS450_Gyro gyro;
 
   public Drivetrain() {
-    frontLeftMotor = new WPI_VictorSPX(RobotMap.FRONT_LEFT_MOTOR);
-    frontRightMotor = new WPI_VictorSPX(RobotMap.FRONT_RIGHT_MOTOR);
-    backLeftMotor = new WPI_VictorSPX(RobotMap.BACK_LEFT_MOTOR);
-    backRightMotor = new WPI_VictorSPX(RobotMap.BACK_RIGHT_MOTOR);
+    frontLeftMotor = new WPI_VictorSPX(RobotMap.DriveMotors.FRONT_LEFT);
+    frontRightMotor = new WPI_VictorSPX(RobotMap.DriveMotors.FRONT_RIGHT);
+    backLeftMotor = new WPI_VictorSPX(RobotMap.DriveMotors.BACK_LEFT);
+    backRightMotor = new WPI_VictorSPX(RobotMap.DriveMotors.BACK_RIGHT);
 
     rodot = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
 
     gyro = new ADXRS450_Gyro();
-    init();
-  }
 
-  public void init() {
     rodot.setDeadband(RobotMap.JOY_DEADZONE);
     gyro.calibrate();
   }
