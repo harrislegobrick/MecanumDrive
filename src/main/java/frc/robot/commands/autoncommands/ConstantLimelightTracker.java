@@ -5,25 +5,32 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.autoncommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ConstantLimelightTracker extends Command {
+  private final double kP = 0.033; // needs tuning
+  private final double kI = 0.0; // needs tuning
+  private double integrator;
+
   public ConstantLimelightTracker() {
     requires(Robot.limelightTurret);
   }
 
   @Override
   protected void initialize() {
+    Robot.limelightTurret.center();
   }
 
   @Override
   protected void execute() {
-    double goTo;
-    goTo = Robot.limelight.getX() / 59.6 + 0.5 - Robot.limelightTurret.getPos();
-    Robot.limelightTurret.setServo(goTo);
+    double error, output;
+    error = -Robot.limelight.getX();
+    integrator += (error * Robot.kDefaultPeriod);
+    output = error * kP + integrator * kI;
+    Robot.limelightTurret.setServo(output);
   }
 
   @Override
