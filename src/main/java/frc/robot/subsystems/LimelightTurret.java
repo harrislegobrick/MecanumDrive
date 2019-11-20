@@ -10,7 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.commands.ConstantLimelightTracker;
+import frc.robot.commands.autoncommands.ConstantLimelightTracker;
 
 /**
  * Add your docs here.
@@ -20,27 +20,34 @@ public class LimelightTurret extends Subsystem {
   private static Servo tracker;
 
   public LimelightTurret() {
-    init();
-  }
-
-  public void init() {
     tracker = new Servo(RobotMap.OtherMotors.LIMELIGHT_SERVO);
   }
 
   public void setServo(double value) {
     if (value != lastServoValue) {
-      tracker.set(value);
+      tracker.setSpeed(value);
       lastServoValue = value;
     }
   }
 
-  public double getPos() {
+  public void stop() {
+    tracker.stopMotor();
+  }
+
+  public double getAngle() {
+    return tracker.getAngle();
+  }
+
+  public double get() {
     return tracker.get();
+  }
+
+  public void center() {
+    tracker.set(0.5);
   }
 
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new ConstantLimelightTracker());
   }
-
 }
