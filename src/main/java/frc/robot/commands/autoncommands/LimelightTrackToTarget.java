@@ -30,7 +30,7 @@ public class LimelightTrackToTarget extends Command {
     double error, derivative, zRotation;
     double magnitude = 0.2;
 
-    error = Robot.limelight.getX();
+    error = Robot.limelightTurret.getFullAngle() + Robot.limelight.getX();
     derivative = (error - previousError) / Robot.kDefaultPeriod;
     zRotation = error * kP + derivative * kD;
     magnitude -= Math.pow((0.07 * Math.pow(Math.abs(error), 0.7)), 2);

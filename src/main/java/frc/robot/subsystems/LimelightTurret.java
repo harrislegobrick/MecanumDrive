@@ -46,6 +46,11 @@ public class LimelightTurret extends Subsystem {
     tracker.set(0.5);
   }
 
+  public double getFullAngle() {
+    // if 0 isn't when full left, change 180 to -180 and -90 to 90
+    return (180 * tracker.get() - 90);
+  }
+
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new ConstantLimelightTracker());
