@@ -69,7 +69,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("limelight area", Robot.limelight.getArea());
     SmartDashboard.putNumber("Servo get", Robot.limelightTurret.get());
     SmartDashboard.putNumber("Servo angle", Robot.limelightTurret.getAngle());
-    SmartDashboard.putNumber("Servo adjusted angle", Robot.limelightTurret.getFullAngle());
   }
 
   /**

@@ -16,18 +16,19 @@ import frc.robot.commands.autoncommands.ConstantLimelightTracker;
  * Add your docs here.
  */
 public class LimelightTurret extends Subsystem {
-  private double lastServoValue;
   private static Servo tracker;
 
   public LimelightTurret() {
     tracker = new Servo(RobotMap.OtherMotors.LIMELIGHT_SERVO);
+    center();
   }
 
-  public void setServo(double value) {
-    if (value != lastServoValue) {
-      tracker.setSpeed(value);
-      lastServoValue = value;
-    }
+  public void moveBy(double value) {
+    tracker.setAngle(value + getAngle());
+  }
+
+  public void setServoAngle(double value) {
+    tracker.setAngle(value);
   }
 
   public void stop() {
@@ -42,13 +43,16 @@ public class LimelightTurret extends Subsystem {
     return tracker.get();
   }
 
-  public void center() {
-    tracker.set(0.5);
+  /**
+   * @return The rotation from -90 to 90 degrees where 0 degrees is facing forward
+   */
+  public double getLLHeading() {
+    return (-180 * tracker.get()) + 90;
   }
 
-  public double getFullAngle() {
-    // if 0 isn't when full left, change 180 to -180 and -90 to 90
-    return (180 * tracker.get() - 90);
+  public void center() {
+    // 180 is full left, 0 is full right
+    tracker.setAngle(90);
   }
 
   @Override

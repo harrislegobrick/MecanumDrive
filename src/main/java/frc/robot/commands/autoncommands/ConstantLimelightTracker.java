@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ConstantLimelightTracker extends Command {
-  private final double kP = 0.033; // needs tuning
+  private final double kP = 0.1; // needs tuning
   private final double kI = 0.0; // needs tuning
   private double integrator;
 
@@ -21,7 +21,6 @@ public class ConstantLimelightTracker extends Command {
 
   @Override
   protected void initialize() {
-    Robot.limelightTurret.center();
   }
 
   @Override
@@ -30,7 +29,7 @@ public class ConstantLimelightTracker extends Command {
     error = -Robot.limelight.getX();
     integrator += (error * Robot.kDefaultPeriod);
     output = error * kP + integrator * kI;
-    Robot.limelightTurret.setServo(output);
+    Robot.limelightTurret.setServoAngle(output);
   }
 
   @Override
@@ -40,7 +39,7 @@ public class ConstantLimelightTracker extends Command {
 
   @Override
   protected void end() {
-    Robot.limelightTurret.setServo(0.5);
+    Robot.limelightTurret.stop();
   }
 
   @Override
