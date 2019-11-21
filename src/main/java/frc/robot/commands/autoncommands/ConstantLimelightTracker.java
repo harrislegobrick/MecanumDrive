@@ -29,7 +29,7 @@ public class ConstantLimelightTracker extends Command {
     error = -Robot.limelight.getX();
     integrator += (error * Robot.kDefaultPeriod);
     output = error * kP + integrator * kI;
-    Robot.limelightTurret.setServoAngle(output);
+    Robot.limelightTurret.moveBy(output);
   }
 
   @Override
