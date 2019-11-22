@@ -24,7 +24,7 @@ public class Limelight extends Subsystem {
    * @return Horizontal Offset From Crosshair To Target (-29.8 to 29.8 degrees)
    */
   public double getX() {
-    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0.00);
   }
 
   /**

@@ -27,9 +27,11 @@ public class ConstantLimelightTracker extends Command {
   protected void execute() {
     double error, output;
     error = -Robot.limelight.getX();
-    integrator += (error * Robot.kDefaultPeriod);
-    output = error * kP + integrator * kI;
-    Robot.limelightTurret.moveBy(output);
+    if (error != 0.00) {
+      integrator += (error * Robot.kDefaultPeriod);
+      output = error * kP + integrator * kI;
+      Robot.limelightTurret.moveBy(output);
+    }
   }
 
   @Override
