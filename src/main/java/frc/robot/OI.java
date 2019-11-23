@@ -7,12 +7,17 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.DriverStation.MatchType;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.POVButton;
 import frc.robot.commands.CalibrateLimelight;
 import frc.robot.commands.MecanumDriveWithStick;
 import frc.robot.commands.MecanumDriveWithStick.Orientation;
+import frc.robot.commands.TurretMove;
+import frc.robot.commands.TurretMove.Direction;
 import frc.robot.commands.autoncommands.LimelightTrackToTarget;
 
 /**
@@ -22,17 +27,25 @@ import frc.robot.commands.autoncommands.LimelightTrackToTarget;
 public class OI {
   private static Joystick stick = new Joystick(RobotMap.JOY_PORT);
   private static Button fieldOriented, robotOriented, trackToTarget, calibrateLimelight;
+  private static POVButton turretL, turretR;
 
   public static void init() {
-    robotOriented = new JoystickButton(stick, 3);
-    fieldOriented = new JoystickButton(stick, 4);
-    trackToTarget = new JoystickButton(stick, 2);
-    calibrateLimelight = new JoystickButton(stick, 6);
+    if (!stick.getName().equals("") || DriverStation.getInstance().getMatchType() != MatchType.None) {
+      robotOriented = new JoystickButton(stick, 3);
+      fieldOriented = new JoystickButton(stick, 4);
+      trackToTarget = new JoystickButton(stick, 2);
+      calibrateLimelight = new JoystickButton(stick, 6);
+      turretL = new POVButton(stick, 270);
+      turretR = new POVButton(stick, 90);
 
-    fieldOriented.whenPressed(new MecanumDriveWithStick(Orientation.FIELD));
-    robotOriented.whenPressed(new MecanumDriveWithStick(Orientation.ROBOT));
-    trackToTarget.whileHeld(new LimelightTrackToTarget());
-    calibrateLimelight.toggleWhenPressed(new CalibrateLimelight());
+      fieldOriented.whenPressed(new MecanumDriveWithStick(Orientation.FIELD));
+      robotOriented.whenPressed(new MecanumDriveWithStick(Orientation.ROBOT));
+      trackToTarget.whileHeld(new LimelightTrackToTarget());
+      calibrateLimelight.toggleWhenPressed(new CalibrateLimelight());
+
+      turretL.whileHeld(new TurretMove(Direction.CCW));
+      turretR.whileHeld(new TurretMove(Direction.CW));
+    }
   }
 
   public double getJoyY() {
