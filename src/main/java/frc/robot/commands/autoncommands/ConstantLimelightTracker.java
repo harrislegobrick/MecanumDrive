@@ -21,15 +21,19 @@ public class ConstantLimelightTracker extends Command {
 
   @Override
   protected void initialize() {
+    if (!Robot.limelight.avalible())
+      Robot.limelightTurret.center();
   }
 
   @Override
   protected void execute() {
-    double error, output;
-    error = -Robot.limelight.getX();
-    if (error != 0.00) {
+    if (Robot.limelight.avalible()) {
+      double error, output;
+
+      error = Robot.limelight.getX();
       integrator += (error * Robot.kDefaultPeriod);
       output = error * kP + integrator * kI;
+
       Robot.limelightTurret.moveBy(output);
     }
   }
