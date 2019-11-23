@@ -20,7 +20,6 @@ public class LimelightTurret extends Subsystem {
 
   public LimelightTurret() {
     tracker = new Servo(RobotMap.OtherMotors.LIMELIGHT_SERVO);
-    center();
   }
 
   public void moveBy(double value) {
