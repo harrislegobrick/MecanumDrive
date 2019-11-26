@@ -22,6 +22,7 @@ public class CalibrateLimelight extends Command {
   @Override
   protected void initialize() {
     Robot.limelight.setTracking();
+    Robot.limelight.setCamPos();
   }
 
   @Override
@@ -42,5 +43,4 @@ public class CalibrateLimelight extends Command {
   protected void interrupted() {
     end();
   }
-
 }
