@@ -16,13 +16,11 @@ public class LimelightTrackToTarget extends Command {
   private final double kD = 0.005;
 
   public LimelightTrackToTarget() {
-    requires(Robot.limelight);
     requires(Robot.drivetrain);
   }
 
   @Override
   protected void initialize() {
-    Robot.limelight.setTracking();
   }
 
   @Override
@@ -48,7 +46,6 @@ public class LimelightTrackToTarget extends Command {
   @Override
   protected void end() {
     Robot.drivetrain.stop();
-    Robot.limelight.setDriving();
   }
 
   @Override
