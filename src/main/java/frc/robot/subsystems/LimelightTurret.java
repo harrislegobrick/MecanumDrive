@@ -26,8 +26,9 @@ public class LimelightTurret extends Subsystem {
     tracker.setAngle(value + getAngle());
   }
 
-  public void setServoAngle(double value) {
-    tracker.setAngle(value);
+  public void center() {
+    // 180 is full left, 0 is full right
+    tracker.setAngle(90);
   }
 
   public void stop() {
@@ -38,6 +39,9 @@ public class LimelightTurret extends Subsystem {
     return tracker.getAngle();
   }
 
+  /**
+   * @return Position from 0.0 to 1.0
+   */
   public double get() {
     return tracker.get();
   }
@@ -46,12 +50,7 @@ public class LimelightTurret extends Subsystem {
    * @return The rotation from -90 to 90 degrees where 0 degrees is facing forward
    */
   public double getLLHeading() {
-    return (-180 * tracker.get()) + 90;
-  }
-
-  public void center() {
-    // 180 is full left, 0 is full right
-    tracker.setAngle(90);
+    return (-180 * get()) + 90;
   }
 
   @Override
