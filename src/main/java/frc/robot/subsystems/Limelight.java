@@ -43,6 +43,7 @@ public class Limelight extends Subsystem {
 
   /**
    * The 2nd cam stream is placed in the lower-right corner of the 1st cam stream
+   * Access the camera at http://10.33.29.11:5800
    */
   public void setCamPos() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(1);
