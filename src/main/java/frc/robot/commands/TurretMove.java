@@ -12,12 +12,12 @@ import frc.robot.Robot;
 
 public class TurretMove extends Command {
   public enum Direction {
-    CCW(1), CW(-CCW.toValue);
+    CCW(1), CW(-1);
 
-    public final double toValue;
+    public final double value;
 
-    private Direction(double toValue) {
-      this.toValue = toValue;
+    private Direction(double value) {
+      this.value = value;
     }
   }
 
@@ -34,7 +34,7 @@ public class TurretMove extends Command {
 
   @Override
   protected void execute() {
-    Robot.limelightTurret.moveBy(direction.toValue);
+    Robot.limelightTurret.moveBy(direction.value);
   }
 
   @Override
