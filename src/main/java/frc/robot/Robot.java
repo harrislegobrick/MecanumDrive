@@ -69,6 +69,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("limelight area", Robot.limelight.getArea());
     SmartDashboard.putNumber("Servo get", Robot.limelightTurret.get());
     SmartDashboard.putNumber("Servo angle", Robot.limelightTurret.getAngle());
+    SmartDashboard.putBoolean("limelight detected", Robot.limelight.getLatency() > 0);
   }
 
   /**
