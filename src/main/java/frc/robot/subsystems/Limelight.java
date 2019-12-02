@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Limelight extends Subsystem {
   public Limelight() {
     setTracking();
-    setCamPos();
+    setPiPMain();
   }
 
   /**
@@ -37,6 +37,10 @@ public class Limelight extends Subsystem {
     return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
   }
 
+  public double getLatency() {
+    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tl").getDouble(-99999);
+  }
+
   public boolean avalible() {
     return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0) == 1;
   }
@@ -45,8 +49,12 @@ public class Limelight extends Subsystem {
    * The 2nd cam stream is placed in the lower-right corner of the 1st cam stream
    * Access the camera at http://10.33.29.11:5800
    */
-  public void setCamPos() {
+  public void setPiPMain() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(1);
+  }
+
+  public void setPiPSecondary() {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(2);
   }
 
   public void setTracking() {
