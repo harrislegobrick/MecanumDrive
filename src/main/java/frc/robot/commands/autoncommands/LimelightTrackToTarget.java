@@ -20,10 +20,6 @@ public class LimelightTrackToTarget extends Command {
   }
 
   @Override
-  protected void initialize() {
-  }
-
-  @Override
   protected void execute() {
     double error, derivative, zRotation;
     double magnitude = 0.2;
@@ -46,10 +42,5 @@ public class LimelightTrackToTarget extends Command {
   @Override
   protected void end() {
     Robot.drivetrain.stop();
-  }
-
-  @Override
-  protected void interrupted() {
-    end();
   }
 }

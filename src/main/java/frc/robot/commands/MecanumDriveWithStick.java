@@ -60,9 +60,4 @@ public class MecanumDriveWithStick extends Command {
   protected void end() {
     Robot.drivetrain.stop();
   }
-
-  @Override
-  protected void interrupted() {
-    end();
-  }
 }

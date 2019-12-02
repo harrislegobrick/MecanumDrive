@@ -47,9 +47,4 @@ public class ConstantLimelightTracker extends Command {
   protected void end() {
     Robot.limelightTurret.stop();
   }
-
-  @Override
-  protected void interrupted() {
-    end();
-  }
 }
