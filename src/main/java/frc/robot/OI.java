@@ -26,8 +26,7 @@ import frc.robot.commands.autoncommands.LimelightTrackToTarget;
  */
 public class OI {
   private static Joystick stick = new Joystick(RobotMap.JOY_PORT);
-  private static Button fieldOriented, robotOriented, trackToTarget, calibrateLimelight;
-  private static POVButton turretL, turretR;
+  private static Button fieldOriented, robotOriented, trackToTarget, calibrateLimelight, turretL, turretR;
 
   public static void init() {
     if (!stick.getName().equals("") || DriverStation.getInstance().getMatchType() != MatchType.None) {
