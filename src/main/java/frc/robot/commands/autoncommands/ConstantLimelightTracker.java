@@ -17,6 +17,7 @@ public class ConstantLimelightTracker extends Command {
 
   public ConstantLimelightTracker() {
     requires(Robot.limelightTurret);
+    setRunWhenDisabled(true);
   }
 
   @Override
