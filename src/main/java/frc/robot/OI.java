@@ -38,19 +38,19 @@ public class OI {
     calibrateLimelight.toggleWhenPressed(new CalibrateLimelight());
   }
 
-  public double getJoyY() {
+  public static double getJoyY() {
     return stick.getY();
   }
   
-  public double getJoyX() {
+  public static double getJoyX() {
     return stick.getX();
   }
 
-  public double getJoyZ() {
+  public static double getJoyZ() {
     return stick.getZ();
   }
 
-  public double getJoyThrottle() {
+  public static double getJoyThrottle() {
     return stick.getThrottle();
   }
 }

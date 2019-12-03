@@ -25,8 +25,6 @@ import frc.robot.subsystems.Limelight;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static OI oi;
-
   Command autonomousCommand;
   SendableChooser<Command> chooser = new SendableChooser<>();
 
@@ -36,8 +34,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    oi = new OI();
-
     OI.init();
     Drivetrain.getInstance().init();
     Limelight.getInstance().init();
