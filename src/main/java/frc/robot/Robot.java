@@ -12,11 +12,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.autoncommands.ChaChaSlide;
-import frc.robot.commands.autoncommands.SimpleAuton;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Limelight;
-import frc.robot.subsystems.LimelightTurret;
+import frc.robot.subsystems.*;
+import frc.robot.commands.autoncommands.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
