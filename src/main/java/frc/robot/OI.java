@@ -7,9 +7,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.DriverStation.MatchType;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.POVButton;
@@ -29,22 +27,20 @@ public class OI {
   private static Button fieldOriented, robotOriented, trackToTarget, calibrateLimelight, turretL, turretR;
 
   public static void init() {
-    if (!stick.getName().equals("") || DriverStation.getInstance().getMatchType() != MatchType.None) {
-      robotOriented = new JoystickButton(stick, 3);
-      fieldOriented = new JoystickButton(stick, 4);
-      trackToTarget = new JoystickButton(stick, 2);
-      calibrateLimelight = new JoystickButton(stick, 6);
-      turretL = new POVButton(stick, 270);
-      turretR = new POVButton(stick, 90);
+    robotOriented = new JoystickButton(stick, 3);
+    fieldOriented = new JoystickButton(stick, 4);
+    trackToTarget = new JoystickButton(stick, 2);
+    calibrateLimelight = new JoystickButton(stick, 6);
+    turretL = new POVButton(stick, 270);
+    turretR = new POVButton(stick, 90);
 
-      fieldOriented.whenPressed(new MecanumDriveWithStick(Orientation.FIELD));
-      robotOriented.whenPressed(new MecanumDriveWithStick(Orientation.ROBOT));
-      trackToTarget.whileHeld(new LimelightTrackToTarget());
-      calibrateLimelight.toggleWhenPressed(new CalibrateLimelight());
+    fieldOriented.whenPressed(new MecanumDriveWithStick(Orientation.FIELD));
+    robotOriented.whenPressed(new MecanumDriveWithStick(Orientation.ROBOT));
+    trackToTarget.whileHeld(new LimelightTrackToTarget());
+    calibrateLimelight.toggleWhenPressed(new CalibrateLimelight());
 
-      turretL.whileHeld(new TurretMove(Direction.CCW));
-      turretR.whileHeld(new TurretMove(Direction.CW));
-    }
+    turretL.whileHeld(new TurretMove(Direction.CCW));
+    turretR.whileHeld(new TurretMove(Direction.CW));
   }
 
   public double getJoyY() {
