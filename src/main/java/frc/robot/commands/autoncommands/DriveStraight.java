@@ -14,14 +14,10 @@ public class DriveStraight extends TimedCommand {
   public enum Drive {
     FORWARD(0), BACKWARD(180), LEFT(-90), RIGHT(90);
 
-    private final int value;
+    public final int value;
 
     private Drive(int value) {
       this.value = value;
-    }
-
-    public int getValue() {
-      return this.value;
     }
   }
 
@@ -52,7 +48,7 @@ public class DriveStraight extends TimedCommand {
   @Override
   protected void execute() {
     error = initalHeading - Robot.drivetrain.getGyroo();
-    Robot.drivetrain.auton(driveSpeed, direction.getValue(), error * kP);
+    Robot.drivetrain.auton(driveSpeed, direction.value, error * kP);
   }
 
   @Override

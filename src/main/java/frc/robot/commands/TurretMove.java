@@ -14,14 +14,10 @@ public class TurretMove extends Command {
   public enum Direction {
     CCW(1), CW(-1);
 
-    private final double value;
+    public final double value;
 
     private Direction(double value) {
       this.value = value;
-    }
-
-    public double getValue() {
-      return this.value;
     }
   }
 
@@ -34,7 +30,7 @@ public class TurretMove extends Command {
 
   @Override
   protected void execute() {
-    Robot.limelightTurret.moveBy(direction.getValue());
+    Robot.limelightTurret.moveBy(direction.value);
   }
 
   @Override
