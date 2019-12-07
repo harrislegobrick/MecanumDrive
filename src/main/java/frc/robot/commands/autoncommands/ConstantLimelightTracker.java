@@ -7,13 +7,15 @@
 
 package frc.robot.commands.autoncommands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ConstantLimelightTracker extends Command {
   private final double kP = 0.1; // needs tuning
   private final double kI = 0.0; // needs tuning
-  private double integrator;
+  private final double kD = 0.0; // needs tuning
+  private double integrator, lastTimestamp, lastError;
 
   public ConstantLimelightTracker() {
     requires(Robot.limelightTurret);
@@ -24,19 +26,25 @@ public class ConstantLimelightTracker extends Command {
   protected void initialize() {
     if (!Robot.limelight.avalible())
       Robot.limelightTurret.center();
+    lastTimestamp = Timer.getFPGATimestamp();
   }
 
   @Override
   protected void execute() {
     if (Robot.limelight.avalible()) {
-      double error, output;
+      double error, output, dt, derivative;
 
       error = Robot.limelight.getX();
-      integrator += (error * Robot.kDefaultPeriod);
-      output = error * kP + integrator * kI;
+      dt = Timer.getFPGATimestamp() - lastTimestamp;
+      integrator += (error * dt);
+      derivative = (error - lastError) / dt;
 
+      output = error * kP + integrator * kI + derivative * kD;
       Robot.limelightTurret.moveBy(output);
+
+      lastError = error;
     }
+    lastTimestamp = Timer.getFPGATimestamp();
   }
 
   @Override
