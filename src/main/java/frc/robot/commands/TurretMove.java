@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import frc.robot.subsystems.LimelightTurret;
 
 public class TurretMove extends Command {
   public enum Direction {
@@ -24,13 +24,13 @@ public class TurretMove extends Command {
   private Direction direction;
 
   public TurretMove(Direction direction) {
-    requires(Robot.limelightTurret);
+    requires(LimelightTurret.getInstance());
     this.direction = direction;
   }
 
   @Override
   protected void execute() {
-    Robot.limelightTurret.moveBy(direction.value);
+    LimelightTurret.moveBy(direction.value);
   }
 
   @Override
@@ -40,6 +40,6 @@ public class TurretMove extends Command {
 
   @Override
   protected void end() {
-    Robot.limelightTurret.stop();
+    LimelightTurret.stop();
   }
 }

@@ -8,7 +8,7 @@
 package frc.robot.commands.autoncommands;
 
 import edu.wpi.first.wpilibj.command.TimedCommand;
-import frc.robot.Robot;
+import frc.robot.subsystems.Drivetrain;
 
 public class DriveStraight extends TimedCommand {
   public enum Drive {
@@ -35,24 +35,24 @@ public class DriveStraight extends TimedCommand {
    */
   public DriveStraight(double time, double driveSpeed, Drive direction) {
     super(time);
-    requires(Robot.drivetrain);
+    requires(Drivetrain.getInstance());
     this.driveSpeed = Math.abs(driveSpeed);
     this.direction = direction;
   }
 
   @Override
   protected void initialize() {
-    initalHeading = Robot.drivetrain.getGyroo();
+    initalHeading = Drivetrain.getGyroo();
   }
 
   @Override
   protected void execute() {
-    error = initalHeading - Robot.drivetrain.getGyroo();
-    Robot.drivetrain.auton(driveSpeed, direction.value, error * kP);
+    error = initalHeading - Drivetrain.getGyroo();
+    Drivetrain.auton(driveSpeed, direction.value, error * kP);
   }
 
   @Override
   protected void end() {
-    Robot.drivetrain.stop();
+    Drivetrain.stop();
   }
 }

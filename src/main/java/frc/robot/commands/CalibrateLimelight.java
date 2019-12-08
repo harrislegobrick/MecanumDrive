@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import frc.robot.subsystems.Limelight;
 
 public class CalibrateLimelight extends Command {
   /**
@@ -16,13 +16,13 @@ public class CalibrateLimelight extends Command {
    * for trying to calibrate the limelight.
    */
   public CalibrateLimelight() {
-    requires(Robot.limelight);
+    requires(Limelight.getInstance());
   }
 
   @Override
   protected void initialize() {
-    Robot.limelight.setTracking();
-    Robot.limelight.setPiPMain();
+    Limelight.setTracking();
+    Limelight.setPiPMain();
   }
 
   @Override
@@ -32,7 +32,7 @@ public class CalibrateLimelight extends Command {
 
   @Override
   protected void end() {
-    Robot.limelight.setDriving();
-    Robot.limelight.setPiPSecondary();
+    Limelight.setDriving();
+    Limelight.setPiPSecondary();
   }
 }

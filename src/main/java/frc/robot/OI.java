@@ -23,10 +23,12 @@ import frc.robot.commands.autoncommands.LimelightTrackToTarget;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  private static Joystick stick = new Joystick(RobotMap.JOY_PORT);
+  private static Joystick stick;
   private static Button fieldOriented, robotOriented, trackToTarget, calibrateLimelight, turretL, turretR;
 
   public static void init() {
+    stick = new Joystick(RobotMap.JOY_PORT);
+
     robotOriented = new JoystickButton(stick, 3);
     fieldOriented = new JoystickButton(stick, 4);
     trackToTarget = new JoystickButton(stick, 2);
@@ -43,19 +45,19 @@ public class OI {
     turretR.whileHeld(new TurretMove(Direction.CW));
   }
 
-  public double getJoyY() {
+  public static double getJoyY() {
     return stick.getY();
   }
 
-  public double getJoyX() {
+  public static double getJoyX() {
     return stick.getX();
   }
 
-  public double getJoyZ() {
+  public static double getJoyZ() {
     return stick.getZ();
   }
 
-  public double getJoyThrottle() {
+  public static double getJoyThrottle() {
     return stick.getThrottle();
   }
 }

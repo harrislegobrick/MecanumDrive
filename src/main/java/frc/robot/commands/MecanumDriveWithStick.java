@@ -8,7 +8,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import frc.robot.OI;
+import frc.robot.subsystems.Drivetrain;
 
 public class MecanumDriveWithStick extends Command {
   public enum Orientation {
@@ -25,28 +26,28 @@ public class MecanumDriveWithStick extends Command {
    *                    the front was facing when changed to field.
    */
   public MecanumDriveWithStick(Orientation orientation) {
-    requires(Robot.drivetrain);
+    requires(Drivetrain.getInstance());
     this.orientation = orientation;
   }
 
   @Override
   protected void initialize() {
     if (orientation == Orientation.FIELD)
-      Robot.drivetrain.resetGyro();
+      Drivetrain.resetGyro();
   }
 
   @Override
   protected void execute() {
-    double throttle = (1.0 - Robot.oi.getJoyThrottle()) / 2.0;
-    double x = Robot.oi.getJoyX() * throttle;
-    double y = -Robot.oi.getJoyY() * throttle;
-    double z = Robot.oi.getJoyZ() * throttle * 0.7;
+    double throttle = (1.0 - OI.getJoyThrottle()) / 2.0;
+    double x = OI.getJoyX() * throttle;
+    double y = -OI.getJoyY() * throttle;
+    double z = OI.getJoyZ() * throttle * 0.7;
     switch (orientation) {
     case ROBOT:
-      Robot.drivetrain.stickRobot(x, y, z);
+      Drivetrain.stickRobot(x, y, z);
       break;
     case FIELD:
-      Robot.drivetrain.stickField(x, y, z);
+      Drivetrain.stickField(x, y, z);
       break;
     }
   }
@@ -58,6 +59,6 @@ public class MecanumDriveWithStick extends Command {
 
   @Override
   protected void end() {
-    Robot.drivetrain.stop();
+    Drivetrain.stop();
   }
 }
